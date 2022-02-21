@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/features/details/container/detail_container.dart';
+import 'package:pokedex/features/home/pages/widgets/pokemon_items.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -15,17 +16,44 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pokemon 2k22'),
+        elevation: 0,
+        centerTitle: false,
+        title: const Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Text(
+            'Pokedex 2k22',
+            style: TextStyle(
+              fontSize: 24,
+            ),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
       ),
-      body: ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text(list[index].name),
-              onTap: () =>
-                  onItemTap('/details', DetailArgs(name: list[index].name)),
-            );
-          }),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: 14,
+          mainAxisSpacing: 14,
+          children: list
+              .map((e) => PokemonItem(
+                    pokemon: e,
+                    onTap: onItemTap,
+                  ))
+              .toList(),
+        ),
+      ),
     );
   }
 }
