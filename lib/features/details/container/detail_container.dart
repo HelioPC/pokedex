@@ -8,11 +8,12 @@ import 'package:pokedex/features/details/pages/detail_page.dart';
 
 class DetailArgs {
   final Pokemon pokemon;
+  final int? index;
 
-  DetailArgs({required this.pokemon});
+  DetailArgs({this.index, required this.pokemon});
 }
 
-class DetailContainer extends StatelessWidget {
+class DetailContainer extends StatefulWidget {
   const DetailContainer({
     Key? key,
     required this.repo,
@@ -24,18 +25,44 @@ class DetailContainer extends StatelessWidget {
   final VoidCallback onBack;
 
   @override
+  State<DetailContainer> createState() => _DetailContainerState();
+}
+
+class _DetailContainerState extends State<DetailContainer> {
+  late PageController controller;
+  late Future<List<Pokemon>> _future;
+  Pokemon? _pokemon;
+  @override
+  void initState() {
+    controller = PageController(
+      viewportFraction: .6,
+      initialPage: widget.args.index!,
+    );
+    _future = widget.repo.getAllPokemons();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Pokemon>>(
-      future: repo.getAllPokemons(),
+      future: _future,
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Loading();
         } else if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
+          _pokemon ??= widget.args.pokemon;
+
           return DetailPage(
-            pokemon: args.pokemon,
+            pokemon: _pokemon!,
             list: snapshot.data!,
-            onBack: onBack,
+            onBack: widget.onBack,
+            controller: controller,
+            onChangePokemon: (Pokemon value) {
+              setState(() {
+                _pokemon = value;
+              });
+            },
           );
         } else {
           return Error(error: (snapshot.error as Failure).msg!);
