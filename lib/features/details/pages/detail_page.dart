@@ -1,40 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
+import 'package:pokedex/features/details/pages/widgets/detail_app_bar.dart';
 
 class DetailPage extends StatelessWidget {
   final Pokemon pokemon;
   final List<Pokemon> list;
-  const DetailPage({Key? key, required this.pokemon, required this.list})
+  final VoidCallback onBack;
+  const DetailPage(
+      {Key? key,
+      required this.pokemon,
+      required this.list,
+      required this.onBack})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(pokemon.name),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 400,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: ListView(
-                  children: list
-                      .map((e) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(e.name),
-                          ))
-                      .toList(),
-                  scrollDirection: Axis.horizontal,
-                ),
-              ),
-            )
-          ],
+        body: Stack(
+      children: [
+        DetailAppBar(
+          pokemon: pokemon,
+          onBack: onBack,
         ),
-      ),
-    );
+      ],
+    ));
   }
 }
