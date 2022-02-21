@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
+import 'package:pokedex/features/details/pages/widgets/detail_item_list.dart';
 
 class DetailList extends StatelessWidget {
   const DetailList({
@@ -16,15 +17,10 @@ class DetailList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 100,
-      left: 0,
-      right: 0,
-      height: 340,
+    return SliverToBoxAdapter(
       child: Container(
         color: pokemon.baseColor,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -54,37 +50,18 @@ class DetailList extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 150,
+              height: 250,
               width: double.infinity,
               child: PageView(
                 onPageChanged: ((value) => onChangePokemon(list[value])),
                 controller: controller,
-                children: list
-                    .map(
-                      (e) => AnimatedOpacity(
-                        duration: const Duration(milliseconds: 400),
-                        opacity: e != pokemon ? .3 : 1,
-                        child: TweenAnimationBuilder<double>(
-                          duration: const Duration(milliseconds: 600),
-                          curve: Curves.easeIn,
-                          tween: Tween<double>(
-                            begin: e != pokemon ? 300 : 100,
-                            end: e != pokemon ? 100 : 300,
-                          ),
-                          builder: ((context, value, child) {
-                            return Center(
-                              child: Image.network(
-                                e.image,
-                                width: value,
-                                fit: BoxFit.contain,
-                                color: e != pokemon ? Colors.black : null,
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-                    )
-                    .toList(),
+                children: list.map((e) {
+                  bool diff = e.name != pokemon.name;
+                  return DetailItemList(
+                    diff: diff,
+                    pokemon: e,
+                  );
+                }).toList(),
               ),
             ),
           ],
