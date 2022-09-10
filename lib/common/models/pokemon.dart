@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Pokemon {
-  final String name;
-  final List<String> type;
   final int id;
+  final double spawnChance;
+  final String name;
   final String num;
+  final String height;
+  final String weight;
+  final String egg;
+  final String spawnTime;
+  final List<String> weaknesses;
+  final List<String> type;
 
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(
@@ -12,6 +18,14 @@ class Pokemon {
       id: json['id'],
       num: json['num'],
       type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
+      egg: json['egg'],
+      height: json['height'],
+      spawnChance: json['spawn_chance'].toDouble(),
+      spawnTime: json['spawn_time'],
+      weaknesses: (json['weaknesses'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      weight: json['weight'],
     );
   }
 
@@ -20,6 +34,12 @@ class Pokemon {
       'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png';
 
   Pokemon({
+    required this.spawnChance,
+    required this.height,
+    required this.weight,
+    required this.egg,
+    required this.spawnTime,
+    required this.weaknesses,
     required this.name,
     required this.type,
     required this.id,

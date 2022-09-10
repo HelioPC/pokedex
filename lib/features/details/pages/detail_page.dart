@@ -35,6 +35,8 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: NotificationListener(
         onNotification: ((notification) {
@@ -71,12 +73,207 @@ class _DetailPageState extends State<DetailPage> {
                       color: widget.pokemon.baseColor,
                     ),
                     Container(
+                      width: double.infinity,
                       decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(24),
-                            topRight: Radius.circular(24),
-                          )),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.4,
+                                    child: const Text(
+                                      "Name:",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.pokemon.name,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.4,
+                                    child: const Text(
+                                      "Height:",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.pokemon.height,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.4,
+                                    child: const Text(
+                                      "Weight:",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.pokemon.weight,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.4,
+                                    child: const Text(
+                                      "Spawn time:",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.pokemon.spawnTime + ' min',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.4,
+                                    child: const Text(
+                                      "Spawn Chance:",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${(widget.pokemon.spawnChance * 100).toStringAsFixed(2)}%',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.4,
+                                    child: const Text(
+                                      "Egg:",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.pokemon.egg,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * 0.4,
+                                    child: const Text(
+                                      "Weakness:",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.pokemon.weaknesses.join(', '),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
