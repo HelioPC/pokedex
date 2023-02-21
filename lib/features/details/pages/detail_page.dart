@@ -261,7 +261,11 @@ class _DetailPageState extends State<DetailPage> {
                                     ),
                                   ),
                                   Text(
-                                    widget.pokemon.weaknesses.join(', '),
+                                    widget.pokemon.weaknesses.length > 2
+                                        ? widget.pokemon.weaknesses
+                                            .sublist(0, 2)
+                                            .join(', ')
+                                        : widget.pokemon.weaknesses.join(', '),
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
