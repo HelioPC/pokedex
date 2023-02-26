@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
+import 'package:pokedex/common/utils/type_icon.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_app_bar.dart';
+import 'package:pokedex/features/details/pages/widgets/detail_hability_label.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_list.dart';
 
 class DetailPage extends StatefulWidget {
@@ -85,195 +87,88 @@ class _DetailPageState extends State<DetailPage> {
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(
-                              height: 30,
+                              height: 20,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: width * 0.4,
-                                    child: const Text(
-                                      "Name:",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.pokemon.name,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                            const Text(
+                              'Info',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: width * 0.4,
-                                    child: const Text(
-                                      "Height:",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.pokemon.height,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Column(
+                              children: [
+                                DetailBasicInfo(
+                                  label: 'Name:',
+                                  value: widget.pokemon.name,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                DetailBasicInfo(
+                                  label: 'Height:',
+                                  value: widget.pokemon.height,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                DetailBasicInfo(
+                                  label: 'Weight:',
+                                  value: widget.pokemon.weight,
+                                ),
+                              ],
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: Divider(),
+                            ),
+                            const Text(
+                              'Habilities',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: width * 0.4,
-                                    child: const Text(
-                                      "Weight:",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: widget.pokemon.type
+                                  .map(
+                                    (e) => DetailHabilityLabel(
+                                      name: e,
                                     ),
-                                  ),
-                                  Text(
-                                    widget.pokemon.weight,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                                  )
+                                  .toList(),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: Divider(),
+                            ),
+                            const Text(
+                              'Weakness',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: width * 0.4,
-                                    child: const Text(
-                                      "Spawn time:",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.pokemon.spawnTime + ' min',
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            const SizedBox(
+                              height: 20,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: width * 0.4,
-                                    child: const Text(
-                                      "Spawn Chance:",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    '${(widget.pokemon.spawnChance * 100).toStringAsFixed(2)}%',
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: width * 0.4,
-                                    child: const Text(
-                                      "Egg:",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.pokemon.egg,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: width * 0.4,
-                                    child: const Text(
-                                      "Weakness:",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.pokemon.weaknesses.length > 2
-                                        ? widget.pokemon.weaknesses
-                                            .sublist(0, 2)
-                                            .join(', ')
-                                        : widget.pokemon.weaknesses.join(', '),
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            Wrap(
+                              spacing: 10,
+                              runSpacing: 20,
+                              children: widget.pokemon.weaknesses
+                                  .map(
+                                    (e) => DetailHabilityLabel(name: e),
+                                  )
+                                  .toList(),
                             ),
                           ],
                         ),
@@ -286,6 +181,40 @@ class _DetailPageState extends State<DetailPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class DetailBasicInfo extends StatelessWidget {
+  final String label;
+  final String value;
+  const DetailBasicInfo({
+    Key? key,
+    required this.label,
+    required this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+        ),
+      ],
     );
   }
 }
