@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/features/details/container/detail_container.dart';
-import 'package:pokedex/features/home/pages/widgets/pokemon_items.dart';
+import 'package:pokedex/features/home/pages/home_favorite.dart';
+import 'package:pokedex/features/home/pages/home_list.dart';
+// import 'package:pokedex/features/home/pages/widgets/pokemon_items.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -20,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchQuery = TextEditingController();
 
   List<Pokemon> _pokeList = [];
+  List<Pokemon> _favorite = [];
 
   int _currentIndex = 0;
 
@@ -47,6 +50,17 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  void _onDoubleTap(Pokemon p) {
+    setState(() {
+      if (_favorite.contains(p)) {
+        _favorite.remove(p);
+      } else {
+        _favorite.add(p);
+      }
+    });
+    print(_favorite);
   }
 
   _HomePageState() {
@@ -80,65 +94,59 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _pages = [
+      HomeList(
+        pokeList: _pokeList,
+        onItemTap: widget.onItemTap,
+        onDoubleTap: _onDoubleTap,
+      ),
+      HomeFavorite(
+        pokeList: _favorite,
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
-        elevation: 6,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         centerTitle: true,
         title: searchBar,
         actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {
-                if (appBarIcon.icon == Icons.search) {
-                  appBarIcon = appBarIcons.last;
-                  searchBar = ListTile(
-                    leading: appBarIcons.first,
-                    title: TextField(
-                      controller: _searchQuery,
-                      decoration: const InputDecoration(
-                        labelText: 'Search',
-                      ),
-                    ),
-                  );
-                } else {
-                  appBarIcon = appBarIcons.first;
-                  _pokeList = widget.list;
-                  searchBar = const Text(
-                    'Pokedex 2k23',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  );
-                }
-              });
-            },
-            icon: appBarIcon,
-          ),
+          _currentIndex == 0
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (appBarIcon.icon == Icons.search) {
+                        appBarIcon = appBarIcons.last;
+                        searchBar = ListTile(
+                          leading: appBarIcons.first,
+                          title: TextField(
+                            controller: _searchQuery,
+                            decoration: const InputDecoration(
+                              labelText: 'Search',
+                            ),
+                          ),
+                        );
+                      } else {
+                        appBarIcon = appBarIcons.first;
+                        _pokeList = widget.list;
+                        searchBar = const Text(
+                          'Pokedex 2k23',
+                          style: TextStyle(
+                            fontSize: 24,
+                          ),
+                        );
+                      }
+                    });
+                  },
+                  icon: appBarIcon,
+                )
+              : const SizedBox(),
         ],
       ),
-      body: _pokeList.isNotEmpty
-          ? Padding(
-              padding: const EdgeInsets.only(
-                  top: 50, left: 24, right: 24, bottom: 0),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                ),
-                itemCount: _pokeList.length,
-                itemBuilder: (context, index) {
-                  return PokemonItem(
-                    pokemon: _pokeList.elementAt(index),
-                    onTap: widget.onItemTap,
-                    index: index,
-                  );
-                },
-              ),
-            )
-          : const Center(
-              child: Text('No pokemons available'),
-            ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 8,
         type: BottomNavigationBarType.fixed,

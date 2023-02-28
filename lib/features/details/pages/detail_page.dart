@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
-import 'package:pokedex/common/utils/type_icon.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_app_bar.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_hability_label.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_list.dart';
@@ -37,8 +36,6 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: NotificationListener(
         onNotification: ((notification) {

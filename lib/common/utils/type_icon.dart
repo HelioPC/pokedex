@@ -4,95 +4,44 @@ Icon choose(String type) {
   double customSize = 18;
   switch (type.toLowerCase()) {
     case 'grass':
-      return Icon(
-        Icons.grass,
-        size: customSize,
-      );
+      return Icon(Icons.grass, size: customSize);
     case 'fire':
-      return Icon(
-        Icons.local_fire_department,
-        size: customSize,
-      );
+      return Icon(Icons.local_fire_department, size: customSize);
     case 'water':
-      return Icon(
-        Icons.water,
-        size: customSize,
-      );
+      return Icon(Icons.water, size: customSize);
     case 'electric':
-      return Icon(
-        Icons.bolt,
-        size: customSize,
-      );
+      return Icon(Icons.bolt, size: customSize);
     case 'ice':
-      return Icon(
-        Icons.ac_unit,
-        size: customSize,
-      );
+      return Icon(Icons.ac_unit, size: customSize);
     case 'fighting':
-      return Icon(
-        Icons.play_for_work,
-        size: customSize,
-      );
+      return Icon(Icons.play_for_work, size: customSize);
     case 'poison':
-      return Icon(
-        Icons.science,
-        size: customSize,
-      );
+      return Icon(Icons.science, size: customSize);
     case 'ground':
-      return Icon(
-        Icons.broken_image,
-        size: customSize,
-      );
+      return Icon(Icons.broken_image, size: customSize);
     case 'flying':
-      return Icon(
-        Icons.flutter_dash,
-        size: customSize,
-      );
+      return Icon(Icons.flutter_dash, size: customSize);
     case 'psychic':
       return Icon(
         Icons.psychology,
         size: customSize,
       );
     case 'bug':
-      return Icon(
-        Icons.pest_control,
-        size: customSize,
-      );
+      return Icon(Icons.pest_control, size: customSize);
     case 'rock':
-      return Icon(
-        Icons.terrain,
-        size: customSize,
-      );
+      return Icon(Icons.terrain, size: customSize);
     case 'ghost':
-      return Icon(
-        Icons.contrast,
-        size: customSize,
-      );
+      return Icon(Icons.contrast, size: customSize);
     case 'dark':
-      return Icon(
-        Icons.nightlight,
-        size: customSize,
-      );
+      return Icon(Icons.nightlight, size: customSize);
     case 'dragon':
-      return Icon(
-        Icons.whatshot,
-        size: customSize,
-      );
+      return Icon(Icons.whatshot, size: customSize);
     case 'steel':
-      return Icon(
-        Icons.shield,
-        size: customSize,
-      );
+      return Icon(Icons.shield, size: customSize);
     case 'fairy':
-      return Icon(
-        Icons.face,
-        size: customSize,
-      );
+      return Icon(Icons.face, size: customSize);
     default:
-      return Icon(
-        Icons.catching_pokemon,
-        size: customSize,
-      );
+      return Icon(Icons.catching_pokemon, size: customSize);
   }
 }
 
@@ -101,7 +50,7 @@ List<Color> getColor(String type) {
     case 'grass':
       return const [Color.fromARGB(255, 126, 200, 80)];
     case 'fire':
-      return const [Color.fromARGB(255, 230, 86, 86)];
+      return const [Color.fromARGB(255, 255, 0, 0)];
     case 'water':
       return const [Color.fromARGB(255, 0, 221, 255)];
     case 'electric':
@@ -117,11 +66,11 @@ List<Color> getColor(String type) {
     case 'flying':
       return const [Color.fromARGB(255, 92, 255, 209)];
     case 'psychic':
-      return const [Color.fromARGB(255, 255, 138, 165)];
+      return const [Color.fromARGB(255, 254, 61, 187)];
     case 'bug':
       return const [Color.fromARGB(255, 32, 255, 47)];
     case 'rock':
-      return const [Color.fromARGB(255, 248, 141, 141)];
+      return const [Color.fromARGB(255, 222, 184, 135)];
     case 'ghost':
       return const [Color.fromARGB(255, 173, 173, 173)];
     case 'dark':
