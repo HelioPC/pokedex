@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 
 class HomeFavorite extends StatefulWidget {
-  const HomeFavorite({Key? key, required this.pokeList}) : super(key: key);
+  const HomeFavorite(
+      {Key? key, required this.pokeList, required this.removeFavorite})
+      : super(key: key);
 
   final List<Pokemon> pokeList;
+  final Function(Pokemon pokemon) removeFavorite;
 
   @override
   State<HomeFavorite> createState() => _HomeFavoriteState();
@@ -29,7 +32,7 @@ class _HomeFavoriteState extends State<HomeFavorite> {
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(.75),
+                    color: widget.pokeList[index].baseColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
@@ -57,7 +60,9 @@ class _HomeFavoriteState extends State<HomeFavorite> {
                         ),
                         IconButton(
                           highlightColor: Colors.white.withOpacity(.2),
-                          onPressed: () {},
+                          onPressed: () {
+                            widget.removeFavorite(widget.pokeList[index]);
+                          },
                           icon: const Icon(
                             Icons.delete,
                             color: Colors.white,

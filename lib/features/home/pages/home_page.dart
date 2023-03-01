@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchQuery = TextEditingController();
 
   List<Pokemon> _pokeList = [];
-  List<Pokemon> _favorite = [];
+  final List<Pokemon> _favorite = [];
 
   int _currentIndex = 0;
 
@@ -37,14 +37,7 @@ class _HomePageState extends State<HomePage> {
     Icons.search,
   );
 
-  List<Icon> appBarIcons = const <Icon>[
-    Icon(
-      Icons.search,
-    ),
-    Icon(
-      Icons.cancel,
-    ),
-  ];
+  List<Icon> appBarIcons = const <Icon>[Icon(Icons.search), Icon(Icons.cancel)];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -52,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _onDoubleTap(Pokemon p) {
+  void _toggleFavoritePokemon(Pokemon p) {
     setState(() {
       if (_favorite.contains(p)) {
         _favorite.remove(p);
@@ -60,7 +53,6 @@ class _HomePageState extends State<HomePage> {
         _favorite.add(p);
       }
     });
-    print(_favorite);
   }
 
   _HomePageState() {
@@ -98,10 +90,11 @@ class _HomePageState extends State<HomePage> {
       HomeList(
         pokeList: _pokeList,
         onItemTap: widget.onItemTap,
-        onDoubleTap: _onDoubleTap,
+        onDoubleTap: _toggleFavoritePokemon,
       ),
       HomeFavorite(
         pokeList: _favorite,
+        removeFavorite: _toggleFavoritePokemon,
       ),
     ];
     return Scaffold(
