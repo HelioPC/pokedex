@@ -89,6 +89,7 @@ class _HomePageState extends State<HomePage> {
     final List<Widget> _pages = [
       HomeList(
         pokeList: _pokeList,
+        favorites: _favorite,
         onItemTap: widget.onItemTap,
         onDoubleTap: _toggleFavoritePokemon,
       ),

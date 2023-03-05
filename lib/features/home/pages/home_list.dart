@@ -8,10 +8,12 @@ class HomeList extends StatelessWidget {
       {Key? key,
       required this.pokeList,
       required this.onItemTap,
-      required this.onDoubleTap})
+      required this.onDoubleTap,
+      required this.favorites})
       : super(key: key);
 
   final List<Pokemon> pokeList;
+  final List<Pokemon> favorites;
   final Function(String, DetailArgs) onItemTap;
   final Function(Pokemon pokemon) onDoubleTap;
 
@@ -35,6 +37,7 @@ class HomeList extends StatelessWidget {
                     onTap: onItemTap,
                     onDoubleTap: onDoubleTap,
                     index: index,
+                    loved: favorites.contains(pokeList.elementAt(index)),
                   );
                 },
               ),

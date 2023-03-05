@@ -10,29 +10,23 @@ class PokemonItem extends StatefulWidget {
     required this.onTap,
     required this.index,
     required this.onDoubleTap,
+    required this.loved,
   }) : super(key: key);
   final Pokemon pokemon;
   final Function(String, DetailArgs) onTap;
   final Function(Pokemon pokemon) onDoubleTap;
   final int index;
+  final bool loved;
 
   @override
   State<PokemonItem> createState() => _PokemonItemState();
 }
 
 class _PokemonItemState extends State<PokemonItem> {
-  var loved = false;
-
-  void toggleLoved() {
-    setState(() {
-      loved = !loved;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () => {widget.onDoubleTap(widget.pokemon), toggleLoved()},
+      onDoubleTap: () => widget.onDoubleTap(widget.pokemon),
       onTap: () => widget.onTap(
         '/details',
         DetailArgs(
@@ -81,7 +75,7 @@ class _PokemonItemState extends State<PokemonItem> {
                               fontSize: 12,
                             ),
                           ),
-                          loved
+                          widget.loved
                               ? const Icon(
                                   Icons.favorite,
                                   color: Colors.white,
