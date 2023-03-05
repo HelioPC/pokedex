@@ -4,18 +4,20 @@ import 'package:pokedex/features/details/container/detail_container.dart';
 import 'package:pokedex/features/home/pages/widgets/pokemon_items.dart';
 
 class HomeList extends StatelessWidget {
-  const HomeList(
-      {Key? key,
-      required this.pokeList,
-      required this.onItemTap,
-      required this.onDoubleTap,
-      required this.favorites})
-      : super(key: key);
+  const HomeList({
+    Key? key,
+    required this.pokeList,
+    required this.onItemTap,
+    required this.onDoubleTap,
+    required this.favorites,
+    required this.getIndex,
+  }) : super(key: key);
 
   final List<Pokemon> pokeList;
   final List<Pokemon> favorites;
   final Function(String, DetailArgs) onItemTap;
   final Function(Pokemon pokemon) onDoubleTap;
+  final int Function(Pokemon pokemon) getIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class HomeList extends StatelessWidget {
                     pokemon: pokeList.elementAt(index),
                     onTap: onItemTap,
                     onDoubleTap: onDoubleTap,
-                    index: index,
+                    index: getIndex(pokeList.elementAt(index)),
                     loved: favorites.contains(pokeList.elementAt(index)),
                   );
                 },
