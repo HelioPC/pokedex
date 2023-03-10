@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     Icons.search,
   );
 
-  List<Icon> appBarIcons = const <Icon>[Icon(Icons.search), Icon(Icons.cancel)];
+  List<Icon> appBarIcons = const [Icon(Icons.search), Icon(Icons.cancel)];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -46,13 +46,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _toggleFavoritePokemon(Pokemon p) {
-    setState(() {
-      if (_favorite.contains(p)) {
-        _favorite.remove(p);
-      } else {
-        _favorite.add(p);
-      }
-    });
+    setState(
+      () => _favorite.contains(p) ? _favorite.remove(p) : _favorite.add(p),
+    );
   }
 
   _HomePageState() {
