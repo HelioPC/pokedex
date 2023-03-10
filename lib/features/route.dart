@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/repositories/pokemon_repo.dart';
-import 'package:pokedex/features/details/container/detail_container.dart';
-import 'package:pokedex/features/home/container/home_container.dart';
+import 'package:pokedex/features/test/test_page.dart';
 
 class PokedexRoute extends StatelessWidget {
   final PokemonRepo repo;
@@ -13,7 +12,7 @@ class PokedexRoute extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
-          return MaterialPageRoute(
+          /*return MaterialPageRoute(
             builder: (context) {
               return HomeContainer(
                 repo: repo,
@@ -22,10 +21,17 @@ class PokedexRoute extends StatelessWidget {
                 },
               );
             },
+          );*/
+          return MaterialPageRoute(
+            builder: (context) {
+              return TestPage(
+                repo: repo,
+              );
+            },
           );
         }
 
-        if (settings.name == '/details') {
+        /*if (settings.name == '/details') {
           return MaterialPageRoute(
             builder: (context) {
               return DetailContainer(
@@ -35,7 +41,7 @@ class PokedexRoute extends StatelessWidget {
               );
             },
           );
-        }
+        }*/
 
         return null;
       },
