@@ -39,7 +39,7 @@ class DetailList extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '#${pokemon.num}',
+                    '#${pokemon.id}',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

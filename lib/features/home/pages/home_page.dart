@@ -65,7 +65,8 @@ class _HomePageState extends State<HomePage> {
                     e.name
                         .toLowerCase()
                         .contains(_searchQuery.text.toLowerCase()) ||
-                    e.num.toLowerCase()
+                    '${e.id}'
+                        .toLowerCase()
                         .contains(_searchQuery.text.toLowerCase()),
               )
               .toList();

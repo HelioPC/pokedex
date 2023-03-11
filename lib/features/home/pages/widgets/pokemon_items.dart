@@ -68,11 +68,11 @@ class _PokemonItemState extends State<PokemonItem> {
                       Row(
                         children: [
                           Text(
-                            widget.pokemon.num,
+                            '${widget.pokemon.id}',
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                              fontSize: 16,
                             ),
                           ),
                           widget.loved
@@ -92,8 +92,8 @@ class _PokemonItemState extends State<PokemonItem> {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: widget.pokemon.type
-                            .map((e) => Types(name: e))
+                        children: widget.pokemon.types
+                            .map((e) => Types(name: e.type['name']))
                             .toList(),
                       ),
                       const Flexible(

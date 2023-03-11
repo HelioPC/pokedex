@@ -1,88 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/common/models/ability.dart';
+import 'package:pokedex/common/models/stats.dart';
+import 'package:pokedex/common/models/types.dart';
 
 class Pokemon {
   final int id;
-  final double spawnChance;
   final String name;
-  final String num;
-  final String height;
-  final String weight;
-  final String egg;
-  final String spawnTime;
-  final List<String> weaknesses;
-  final List<String> type;
+  final int height;
+  final int weight;
+  final Map<String, dynamic> sprites;
+  final List<Types> types;
+  final List<Ability> abilities;
+  final List<Stats> stats;
 
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(
-      name: json['name'],
       id: json['id'],
-      num: json['num'],
-      type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
-      egg: json['egg'],
+      name: json['name'],
       height: json['height'],
-      spawnChance: json['spawn_chance'].toDouble(),
-      spawnTime: json['spawn_time'],
-      weaknesses: (json['weaknesses'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
       weight: json['weight'],
+      sprites: json['sprites'],
+      types: List<Types>.from(json['types'].map((x) => Types.fromMap(x))),
+      abilities:
+          List<Ability>.from(json['abilities'].map((x) => Ability.fromMap(x))),
+      stats: List<Stats>.from(json['stats'].map((x) => Stats.fromMap(x))),
     );
   }
 
-  Color? get baseColor => _color(type: type[0]);
+  Color? get baseColor => _color(type: types[0].type['name'] ?? 'normal');
   String get image =>
-      'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png';
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
 
   Pokemon({
-    required this.spawnChance,
+    required this.stats,
+    required this.abilities,
+    required this.types,
+    required this.sprites,
     required this.height,
     required this.weight,
-    required this.egg,
-    required this.spawnTime,
-    required this.weaknesses,
     required this.name,
-    required this.type,
     required this.id,
-    required this.num,
   });
 
   static Color? _color({required String type}) {
-    switch (type) {
-      case 'Normal':
+    switch (type.toLowerCase()) {
+      case 'normal':
         return Colors.brown[400];
-      case 'Fire':
+      case 'fire':
         return Colors.red;
-      case 'Water':
+      case 'water':
         return Colors.blue;
-      case 'Grass':
+      case 'grass':
         return Colors.green;
-      case 'Electric':
+      case 'electric':
         return Colors.amber;
-      case 'Ice':
+      case 'ice':
         return Colors.cyanAccent[400];
-      case 'Fighting':
+      case 'fighting':
         return Colors.orange;
-      case 'Poison':
+      case 'poison':
         return Colors.purple;
-      case 'Ground':
+      case 'ground':
         return Colors.orange[300];
-      case 'Flying':
+      case 'flying':
         return Colors.indigo[200];
-      case 'Psychic':
+      case 'psychic':
         return Colors.pink;
-      case 'Bug':
+      case 'bug':
         return Colors.lightGreen[500];
-      case 'Rock':
+      case 'rock':
         return Colors.grey;
-      case 'Ghost':
+      case 'ghost':
         return Colors.indigo[400];
-      case 'Dark':
+      case 'dark':
         return Colors.brown;
-      case 'Dragon':
+      case 'dragon':
         return Colors.indigo[800];
-      case 'Steel':
+      case 'steel':
         return Colors.blueGrey;
-      case 'Fairy':
+      case 'fairy':
         return Colors.pinkAccent[100];
       default:
         return Colors.grey;

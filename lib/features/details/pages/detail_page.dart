@@ -110,14 +110,14 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                                 DetailBasicInfo(
                                   label: 'Height:',
-                                  value: widget.pokemon.height,
+                                  value: '${widget.pokemon.height}',
                                 ),
                                 const SizedBox(
                                   height: 10,
                                 ),
                                 DetailBasicInfo(
                                   label: 'Weight:',
-                                  value: widget.pokemon.weight,
+                                  value: '${widget.pokemon.weight}',
                                 ),
                               ],
                             ),
@@ -136,34 +136,11 @@ class _DetailPageState extends State<DetailPage> {
                               height: 20,
                             ),
                             Row(
-                              children: widget.pokemon.type
+                              children: widget.pokemon.types
                                   .map(
                                     (e) => DetailHabilityLabel(
-                                      name: e,
+                                      name: e.type['name'],
                                     ),
-                                  )
-                                  .toList(),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              child: Divider(),
-                            ),
-                            const Text(
-                              'Weakness',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Wrap(
-                              spacing: 10,
-                              runSpacing: 20,
-                              children: widget.pokemon.weaknesses
-                                  .map(
-                                    (e) => DetailHabilityLabel(name: e),
                                   )
                                   .toList(),
                             ),
