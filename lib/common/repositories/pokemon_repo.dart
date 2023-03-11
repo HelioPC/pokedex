@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:pokedex/common/consts/api.dart';
 import 'package:pokedex/common/error/failure.dart';
@@ -27,7 +25,6 @@ class PokemonRepo implements IPokemonRepo {
       }
       return list;
     } catch (e) {
-      print(e);
       throw Failure(msg: 'Não foi possível carregar os dados');
     }
   }

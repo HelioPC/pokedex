@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pokedex/common/models/pokemon.dart';
-import 'package:pokedex/features/test/types.dart';
+import 'package:pokedex/features/details/container/detail_container.dart';
+import 'package:pokedex/features/home/pages/widgets/type.dart';
 
 class PokemonItem extends StatefulWidget {
   const PokemonItem({
     Key? key,
     required this.pokemon,
+    required this.onTap,
     required this.index,
+    required this.onDoubleTap,
+    required this.loved,
   }) : super(key: key);
   final Pokemon pokemon;
+  final Function(String, DetailArgs) onTap;
+  final Function(Pokemon pokemon) onDoubleTap;
   final int index;
+  final bool loved;
 
   @override
   State<PokemonItem> createState() => _PokemonItemState();
@@ -20,8 +26,14 @@ class _PokemonItemState extends State<PokemonItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () {},
-      onTap: () {},
+      onDoubleTap: () => widget.onDoubleTap(widget.pokemon),
+      onTap: () => widget.onTap(
+        '/details',
+        DetailArgs(
+          pokemon: widget.pokemon,
+          index: widget.index,
+        ),
+      ),
       child: Stack(
         children: [
           Container(
@@ -53,13 +65,24 @@ class _PokemonItemState extends State<PokemonItem> {
                           ),
                         ),
                       ),
-                      Text(
-                        '${widget.pokemon.id}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            '${widget.pokemon.id}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          widget.loved
+                              ? const Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                  size: 18,
+                                )
+                              : const SizedBox(),
+                        ],
                       ),
                     ],
                   ),
@@ -88,7 +111,7 @@ class _PokemonItemState extends State<PokemonItem> {
           Positioned(
             bottom: 14,
             right: 0,
-            child: SvgPicture.network(
+            child: Image.network(
               widget.pokemon.image,
               height: 100,
               width: 100,

@@ -29,7 +29,7 @@ class Pokemon {
 
   Color? get baseColor => _color(type: types[0].type['name'] ?? 'normal');
   String get image =>
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/$id.svg';
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
 
   Pokemon({
     required this.stats,
