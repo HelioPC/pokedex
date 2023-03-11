@@ -29,9 +29,7 @@ class Pokemon {
 
   Color? get baseColor => _color(type: types[0].type['name'] ?? 'normal');
   String get image =>
-      sprites['front_default'] ??
-      'https://raw.githubusercontent.com/PokeAPI'
-          '/sprites/master/sprites/pokemon/$id.png';
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/$id.svg';
 
   Pokemon({
     required this.stats,
@@ -45,42 +43,42 @@ class Pokemon {
   });
 
   static Color? _color({required String type}) {
-    switch (type) {
-      case 'Normal':
+    switch (type.toLowerCase()) {
+      case 'normal':
         return Colors.brown[400];
-      case 'Fire':
+      case 'fire':
         return Colors.red;
-      case 'Water':
+      case 'water':
         return Colors.blue;
-      case 'Grass':
+      case 'grass':
         return Colors.green;
-      case 'Electric':
+      case 'electric':
         return Colors.amber;
-      case 'Ice':
+      case 'ice':
         return Colors.cyanAccent[400];
-      case 'Fighting':
+      case 'fighting':
         return Colors.orange;
-      case 'Poison':
+      case 'poison':
         return Colors.purple;
-      case 'Ground':
+      case 'ground':
         return Colors.orange[300];
-      case 'Flying':
+      case 'flying':
         return Colors.indigo[200];
-      case 'Psychic':
+      case 'psychic':
         return Colors.pink;
-      case 'Bug':
+      case 'bug':
         return Colors.lightGreen[500];
-      case 'Rock':
+      case 'rock':
         return Colors.grey;
-      case 'Ghost':
+      case 'ghost':
         return Colors.indigo[400];
-      case 'Dark':
+      case 'dark':
         return Colors.brown;
-      case 'Dragon':
+      case 'dragon':
         return Colors.indigo[800];
-      case 'Steel':
+      case 'steel':
         return Colors.blueGrey;
-      case 'Fairy':
+      case 'fairy':
         return Colors.pinkAccent[100];
       default:
         return Colors.grey;

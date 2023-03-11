@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/error/failure.dart';
+import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/common/repositories/pokemon_repo.dart';
 import 'package:pokedex/features/test/center_page.dart';
 
@@ -13,7 +14,7 @@ class TestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
+    return FutureBuilder<List<Pokemon>>(
       future: repo.getAllPokemons(),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

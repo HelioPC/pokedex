@@ -6,7 +6,7 @@ import 'package:pokedex/common/error/failure.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 
 abstract class IPokemonRepo {
-  Future<List<dynamic>> getAllPokemons();
+  Future<List<Pokemon>> getAllPokemons();
 }
 
 class PokemonRepo implements IPokemonRepo {
@@ -15,7 +15,7 @@ class PokemonRepo implements IPokemonRepo {
   PokemonRepo({required this.dio});
 
   @override
-  Future<List<dynamic>> getAllPokemons() async {
+  Future<List<Pokemon>> getAllPokemons() async {
     try {
       final response =
           await dio.get('${ApiConsts.pokeapiURL}pokemon?limit=150');
@@ -25,8 +25,7 @@ class PokemonRepo implements IPokemonRepo {
             await dio.get('${ApiConsts.pokeapiURL}pokemon/${p['name']}');
         list.add(Pokemon.fromMap(pResponse.data));
       }
-      print(list);
-      return [];
+      return list;
     } catch (e) {
       print(e);
       throw Failure(msg: 'Não foi possível carregar os dados');
