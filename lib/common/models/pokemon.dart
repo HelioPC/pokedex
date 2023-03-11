@@ -1,49 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/common/models/ability.dart';
+import 'package:pokedex/common/models/stats.dart';
+import 'package:pokedex/common/models/types.dart';
 
 class Pokemon {
   final int id;
-  final double spawnChance;
   final String name;
-  final String num;
-  final String height;
-  final String weight;
-  final String egg;
-  final String spawnTime;
-  final List<String> weaknesses;
-  final List<String> type;
+  final int height;
+  final int weight;
+  final Map<String, dynamic> sprites;
+  final List<Types> types;
+  final List<Ability> abilities;
+  final List<Stats> stats;
 
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(
-      name: json['name'],
       id: json['id'],
-      num: json['num'],
-      type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
-      egg: json['egg'],
+      name: json['name'],
       height: json['height'],
-      spawnChance: json['spawn_chance'].toDouble(),
-      spawnTime: json['spawn_time'],
-      weaknesses: (json['weaknesses'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
       weight: json['weight'],
+      sprites: json['sprites'],
+      types: List<Types>.from(json['types'].map((x) => Types.fromMap(x))),
+      abilities:
+          List<Ability>.from(json['abilities'].map((x) => Ability.fromMap(x))),
+      stats: List<Stats>.from(json['stats'].map((x) => Stats.fromMap(x))),
     );
   }
 
-  Color? get baseColor => _color(type: type[0]);
+  Color? get baseColor => _color(type: types[0].type['name'] ?? 'normal');
   String get image =>
-      'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png';
+      sprites['front_default'] ??
+      'https://raw.githubusercontent.com/PokeAPI'
+          '/sprites/master/sprites/pokemon/$id.png';
 
   Pokemon({
-    required this.spawnChance,
+    required this.stats,
+    required this.abilities,
+    required this.types,
+    required this.sprites,
     required this.height,
     required this.weight,
-    required this.egg,
-    required this.spawnTime,
-    required this.weaknesses,
     required this.name,
-    required this.type,
     required this.id,
-    required this.num,
   });
 
   static Color? _color({required String type}) {
