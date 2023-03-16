@@ -21,7 +21,10 @@ class DetailAppBar extends StatelessWidget {
       backgroundColor: pokemon.baseColor,
       leading: IconButton(
         onPressed: onBack,
-        icon: const Icon(Icons.chevron_left),
+        icon: const Icon(
+          Icons.chevron_left,
+          color: Colors.white,
+        ),
       ),
       centerTitle: false,
       title: AnimatedOpacity(
