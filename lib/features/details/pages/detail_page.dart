@@ -69,17 +69,8 @@ class _DetailPageState extends State<DetailPage> {
                 child: Stack(
                   children: [
                     Container(
-                      color: widget.pokemon.baseColor,
-                    ),
-                    Container(
                       width: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50),
-                        ),
-                      ),
+                      color: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(20),
                         child: Column(
