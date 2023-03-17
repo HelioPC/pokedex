@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       title: 'Pokedex 2k22',
       theme: ThemeData(
         colorSchemeSeed: Colors.red,
-        useMaterial3: true,
       ),
       home: PokedexRoute(
         repo: PokemonRepo(

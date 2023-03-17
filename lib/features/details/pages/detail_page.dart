@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
+import 'package:pokedex/common/utils/string.dart';
+import 'package:pokedex/common/utils/type_icon.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_app_bar.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_hability_label.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_list.dart';
@@ -80,61 +82,90 @@ class _DetailPageState extends State<DetailPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
-                              'Info',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            Text(
+                              toCapitalCase(widget.pokemon.name),
+                              style: const TextStyle(
+                                fontSize: 38,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
-                            Column(
+                            Row(
                               children: [
-                                DetailBasicInfo(
-                                  label: 'Name:',
-                                  value: widget.pokemon.name,
+                                const Text(
+                                  'Nº',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(75, 75, 75, 1),
+                                    fontSize: 20,
+                                  ),
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                DetailBasicInfo(
-                                  label: 'Height:',
-                                  value: '${widget.pokemon.height}',
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                DetailBasicInfo(
-                                  label: 'Weight:',
-                                  value: '${widget.pokemon.weight}',
+                                Text(
+                                  formatNumber(widget.pokemon.id),
+                                  style: const TextStyle(
+                                    color: Color.fromRGBO(75, 75, 75, 1),
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ],
                             ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              child: Divider(),
-                            ),
-                            const Text(
-                              'Habilities',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 20),
+                              width: double.infinity,
+                              height: 47,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: widget.pokemon.types
+                                    .map(
+                                      (t) => Container(
+                                        margin: const EdgeInsets.only(
+                                          right: 10,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: getColor(t.type['name'])[0],
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(4),
+                                                margin: const EdgeInsets.only(
+                                                  right: 10,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                ),
+                                                child: choose(
+                                                  t.type['name'],
+                                                  customSize: 25,
+                                                  color: getColor(
+                                                      t.type['name'])[0],
+                                                ),
+                                              ),
+                                              Text(
+                                                toCapitalCase(t.type['name']),
+                                                style: const TextStyle(
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: widget.pokemon.types
-                                  .map(
-                                    (e) => DetailHabilityLabel(
-                                      name: e.type['name'],
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -146,40 +177,6 @@ class _DetailPageState extends State<DetailPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class DetailBasicInfo extends StatelessWidget {
-  final String label;
-  final String value;
-  const DetailBasicInfo({
-    Key? key,
-    required this.label,
-    required this.value,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 14,
-          ),
-        ),
-      ],
     );
   }
 }
