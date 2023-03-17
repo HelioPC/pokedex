@@ -20,9 +20,7 @@ A new Flutter project.
 
 ## Descrição
 
-Pokedex é uma aplicação muito conhecida para visualizar pokemons e suas
-informações, feita através do tutorial do programador (e youtuber ?)
-[Renato Mota](https://github.com/RenatoLucasMota).
+Pokedex é uma aplicação muito conhecida para visualizar pokemons e seus detalhes.
 
 ## Imagens
 
