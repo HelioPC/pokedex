@@ -18,8 +18,95 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+class _MySearchDelegate extends SearchDelegate<String> {
+  final List<Pokemon> _pokeList;
+  final List<String> _history;
+
+  _MySearchDelegate(List<Pokemon> list)
+      : _pokeList = list,
+        _history = [],
+        super();
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      tooltip: 'Back',
+      onPressed: () => close(context, ''),
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
+      ),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: () => close(context, query),
+              child: Text(
+                query,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final List<String> suggestions = query.isEmpty
+        ? _history
+        : _pokeList
+            .map((e) {
+              if (e.name.contains(query)) {
+                return e.name;
+              } else {
+                return '';
+              }
+            })
+            .where((element) => element.contains(query))
+            .toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, i) {
+        final String suggestion = suggestions[i];
+
+        return ListTile(
+          leading: query.isEmpty ? const Icon(Icons.history) : null,
+          title: Text(suggestion),
+          onTap: () {
+            query = suggestion;
+            _history.insert(0, suggestion);
+            showResults(context);
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return <Widget>[
+      if (query.isNotEmpty)
+        IconButton(onPressed: () {}, icon: const Icon(Icons.clear))
+    ];
+  }
+}
+
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchQuery = TextEditingController();
+  late _MySearchDelegate _delegate;
 
   List<Pokemon> _pokeList = [];
   final List<Pokemon> _favorite = [];
@@ -79,6 +166,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _pokeList = widget.list;
+    _delegate = _MySearchDelegate(widget.list);
   }
 
   @override
@@ -98,43 +186,34 @@ class _HomePageState extends State<HomePage> {
     ];
     return Scaffold(
       appBar: AppBar(
-        elevation: 5,
+        elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        scrolledUnderElevation: 0,
-        centerTitle: true,
-        title: searchBar,
-        actions: [
-          _currentIndex == 0
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (appBarIcon.icon == Icons.search) {
-                        appBarIcon = appBarIcons.last;
-                        searchBar = ListTile(
-                          leading: appBarIcons.first,
-                          title: TextField(
-                            controller: _searchQuery,
-                            decoration: const InputDecoration(
-                              labelText: 'Search',
-                            ),
-                          ),
-                        );
-                      } else {
-                        appBarIcon = appBarIcons.first;
-                        _pokeList = widget.list;
-                        searchBar = const Text(
-                          'Pokedex 2k23',
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
-                        );
-                      }
-                    });
-                  },
-                  icon: appBarIcon,
-                )
-              : const SizedBox(),
+        title: const Text('Pokedex'),
+        actions: <Widget>[
+          if (_searchQuery.text.isEmpty)
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () async {
+                final String? selected = await showSearch(
+                  context: context,
+                  delegate: _delegate,
+                );
+                if (selected != null && selected.isNotEmpty) {
+                  _searchQuery.text = selected;
+                }
+                if (mounted && selected != null && selected.isNotEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(selected),
+                  ));
+                }
+              },
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.clear),
+              onPressed: () => _searchQuery.text = '',
+            )
         ],
       ),
       body: IndexedStack(
