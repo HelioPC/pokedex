@@ -9,11 +9,23 @@ class DetailBasicInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> _infos = [
-      {'PESO': '${pokemon.weight / 10} kg'},
-      {'ALTURA': '${pokemon.height / 10} m'},
-      {'CATEGORIA': toCapitalCase(pokemon.types[0].type['name'])},
-      {'HABILIDADE': toCapitalCase(pokemon.abilities[0].ability['name'])},
+    List<Map<String, dynamic>> _infos = [
+      {
+        'WEIGHT': '${pokemon.weight / 10} kg',
+        'icon': Icons.balance,
+      },
+      {
+        'HEIGHT': '${pokemon.height / 10} m',
+        'icon': Icons.height,
+      },
+      {
+        'CATEGORY': toCapitalCase(pokemon.types[0].type['name']),
+        'icon': Icons.category,
+      },
+      {
+        'ABILITY': toCapitalCase(pokemon.abilities[0].ability['name']),
+        'icon': Icons.catching_pokemon,
+      },
     ];
     return SizedBox(
       width: double.infinity,
@@ -24,7 +36,6 @@ class DetailBasicInfo extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10,
-          mainAxisSpacing: 20,
           childAspectRatio: 1.8,
         ),
         itemCount: _infos.length,
@@ -34,43 +45,41 @@ class DetailBasicInfo extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(
-                    Icons.balance,
+                  Icon(
+                    _infos.elementAt(index).values.last,
                     color: Colors.grey,
+                    size: 20,
                   ),
                   const SizedBox(width: 10),
                   Text(
                     _infos[index].keys.first,
                     style: const TextStyle(
                       color: Colors.grey,
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
-              Container(
-                width: double.infinity,
-                height: 55,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(
-                      255,
-                      196,
-                      196,
-                      196,
-                    ),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: const BorderSide(
+                      color: Color.fromARGB(255, 192, 192, 192)),
                 ),
-                child: Center(
-                  child: Text(
-                    _infos[index].values.first,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                elevation: 0,
+                child: SizedBox(
+                  height: 35,
+                  width: double.infinity,
+                  child: Center(
+                    child: Text(
+                      _infos[index].values.first,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),

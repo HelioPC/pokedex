@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
-import 'package:pokedex/common/utils/string.dart';
-import 'package:pokedex/common/utils/type_icon.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_app_bar.dart';
-import 'package:pokedex/features/details/pages/widgets/detail_basic_info.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_header.dart';
 import 'package:pokedex/features/details/pages/widgets/detail_list.dart';
 

@@ -20,30 +20,26 @@ class DetailHeader extends StatelessWidget {
         Text(
           toCapitalCase(pokemon.name),
           style: const TextStyle(
-            fontSize: 38,
-            fontWeight: FontWeight.w500,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(
           height: 10,
         ),
-        Row(
-          children: [
-            const Text(
-              'Nº',
-              style: TextStyle(
-                color: Color.fromRGBO(75, 75, 75, 1),
-                fontSize: 20,
-              ),
+        RichText(
+          text: TextSpan(
+            text: 'Nº ',
+            style: const TextStyle(
+              color: Color.fromRGBO(75, 75, 75, 1),
+              fontSize: 18,
             ),
-            Text(
-              formatNumber(pokemon.id),
-              style: const TextStyle(
-                color: Color.fromRGBO(75, 75, 75, 1),
-                fontSize: 20,
-              ),
-            ),
-          ],
+            children: [
+              TextSpan(
+                text: formatNumber(pokemon.id),
+              )
+            ],
+          ),
         ),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
@@ -61,15 +57,19 @@ class DetailHeader extends StatelessWidget {
                 horizontal: 10,
                 vertical: 4,
               ),
-              backgroundColor:
-                  getColor(pokemon.types.elementAt(index).type['name'])[0],
+              backgroundColor: Pokemon.getColor(
+                type: pokemon.types.elementAt(index).type['name'],
+              )!
+                  .withOpacity(.7),
               avatar: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: choose(
                   pokemon.types.elementAt(index).type['name'],
-                  customSize: 25,
-                  color:
-                      getColor(pokemon.types.elementAt(index).type['name'])[0],
+                  customSize: 20,
+                  color: Pokemon.getColor(
+                        type: pokemon.types.elementAt(index).type['name'],
+                      ) ??
+                      Colors.grey,
                 ),
               ),
               label: Text(

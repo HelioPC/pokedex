@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pokedex 2k22',
       theme: ThemeData(
-        colorSchemeSeed: Colors.red,
+        primarySwatch: Colors.blue,
       ),
       home: PokedexRoute(
         repo: PokemonRepo(

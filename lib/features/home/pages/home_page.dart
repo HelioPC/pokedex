@@ -98,7 +98,9 @@ class _HomePageState extends State<HomePage> {
     ];
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        elevation: 5,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         scrolledUnderElevation: 0,
         centerTitle: true,
         title: searchBar,

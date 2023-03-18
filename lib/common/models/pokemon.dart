@@ -27,7 +27,7 @@ class Pokemon {
     );
   }
 
-  Color? get baseColor => _color(type: types[0].type['name'] ?? 'normal');
+  Color? get baseColor => getColor(type: types[0].type['name'] ?? 'normal');
   String get image =>
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
 
@@ -42,10 +42,10 @@ class Pokemon {
     required this.id,
   });
 
-  static Color? _color({required String type}) {
+  static Color? getColor({required String type}) {
     switch (type.toLowerCase()) {
       case 'normal':
-        return Colors.brown[400];
+        return Colors.grey;
       case 'fire':
         return Colors.red;
       case 'water':
@@ -61,7 +61,7 @@ class Pokemon {
       case 'poison':
         return Colors.purple;
       case 'ground':
-        return Colors.orange[300];
+        return Colors.brown;
       case 'flying':
         return Colors.indigo[200];
       case 'psychic':
