@@ -190,31 +190,6 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         title: const Text('Pokedex'),
-        actions: <Widget>[
-          if (_searchQuery.text.isEmpty)
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () async {
-                final String? selected = await showSearch(
-                  context: context,
-                  delegate: _delegate,
-                );
-                if (selected != null && selected.isNotEmpty) {
-                  _searchQuery.text = selected;
-                }
-                if (mounted && selected != null && selected.isNotEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(selected),
-                  ));
-                }
-              },
-            )
-          else
-            IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: () => _searchQuery.text = '',
-            )
-        ],
       ),
       body: IndexedStack(
         index: _currentIndex,
@@ -239,6 +214,41 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          if (_pokeList.length == widget.list.length) {
+            final String? selected = await showSearch(
+              context: context,
+              delegate: _delegate,
+            );
+            if (selected != null && selected.isNotEmpty) {
+              _searchQuery.text = selected;
+            }
+            if (mounted && selected != null && selected.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(selected),
+              ));
+            }
+          } else {
+            _searchQuery.text = '';
+          }
+        },
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, anim) => RotationTransition(
+            turns: child.key == const ValueKey('icon1')
+                ? Tween<double>(begin: 1, end: 0.75).animate(anim)
+                : Tween<double>(begin: 0.75, end: 1).animate(anim),
+            child: FadeTransition(opacity: anim, child: child),
+          ),
+          child: _pokeList.length != widget.list.length
+              ? const Icon(Icons.close, key: ValueKey('icon1'))
+              : const Icon(
+                  Icons.add,
+                  key: ValueKey('icon2'),
+                ),
+        ),
       ),
     );
   }
