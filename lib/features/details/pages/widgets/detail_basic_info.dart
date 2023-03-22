@@ -9,7 +9,7 @@ class DetailBasicInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> _infos = [
+    List<Map<String, dynamic>> infos = [
       {
         'WEIGHT': '${pokemon.weight / 10} kg',
         'icon': Icons.balance,
@@ -38,7 +38,7 @@ class DetailBasicInfo extends StatelessWidget {
           crossAxisSpacing: 10,
           childAspectRatio: 1.8,
         ),
-        itemCount: _infos.length,
+        itemCount: infos.length,
         itemBuilder: (context, index) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,13 +46,13 @@ class DetailBasicInfo extends StatelessWidget {
               Row(
                 children: [
                   Icon(
-                    _infos.elementAt(index).values.last,
+                    infos.elementAt(index).values.last,
                     color: Colors.grey,
                     size: 20,
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    _infos[index].keys.first,
+                    infos[index].keys.first,
                     style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
@@ -75,7 +75,7 @@ class DetailBasicInfo extends StatelessWidget {
                   width: double.infinity,
                   child: Center(
                     child: Text(
-                      _infos[index].values.first,
+                      infos[index].values.first,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
