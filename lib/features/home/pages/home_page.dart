@@ -3,7 +3,6 @@ import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/features/details/container/detail_container.dart';
 import 'package:pokedex/features/home/pages/home_favorite.dart';
 import 'package:pokedex/features/home/pages/home_list.dart';
-// import 'package:pokedex/features/home/pages/widgets/pokemon_items.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -67,13 +66,7 @@ class _MySearchDelegate extends SearchDelegate<String> {
     final List<String> suggestions = query.isEmpty
         ? _history
         : _pokeList
-            .map((e) {
-              if (e.name.contains(query)) {
-                return e.name;
-              } else {
-                return '';
-              }
-            })
+            .map((e) => e.name.contains(query) ? e.name : '')
             .where((element) => element.contains(query))
             .toList();
 
@@ -99,7 +92,7 @@ class _MySearchDelegate extends SearchDelegate<String> {
   List<Widget>? buildActions(BuildContext context) {
     return <Widget>[
       if (query.isNotEmpty)
-        IconButton(onPressed: () {}, icon: const Icon(Icons.clear))
+        IconButton(onPressed: () => query = '', icon: const Icon(Icons.clear))
     ];
   }
 }
@@ -107,12 +100,9 @@ class _MySearchDelegate extends SearchDelegate<String> {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchQuery = TextEditingController();
   late _MySearchDelegate _delegate;
-
   List<Pokemon> _pokeList = [];
   final List<Pokemon> _favorite = [];
-
   int _currentIndex = 0;
-
   Widget searchBar = const Text(
     'Pokedex 2k23',
     style: TextStyle(
@@ -120,16 +110,8 @@ class _HomePageState extends State<HomePage> {
     ),
   );
 
-  Icon appBarIcon = const Icon(
-    Icons.search,
-  );
-
-  List<Icon> appBarIcons = const [Icon(Icons.search), Icon(Icons.cancel)];
-
   void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    setState(() => _currentIndex = index);
   }
 
   void _toggleFavoritePokemon(Pokemon p) {
@@ -141,9 +123,7 @@ class _HomePageState extends State<HomePage> {
   _HomePageState() {
     _searchQuery.addListener(() {
       if (_searchQuery.text.isEmpty) {
-        setState(() {
-          _pokeList = widget.list;
-        });
+        setState(() => _pokeList = widget.list);
       } else {
         setState(() {
           _pokeList = widget.list
@@ -171,19 +151,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      HomeList(
-        pokeList: _pokeList,
-        favorites: _favorite,
-        onItemTap: widget.onItemTap,
-        onDoubleTap: _toggleFavoritePokemon,
-        getIndex: (pokemon) => widget.list.indexOf(pokemon),
-      ),
-      HomeFavorite(
-        pokeList: _favorite,
-        removeFavorite: _toggleFavoritePokemon,
-      ),
-    ];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -193,7 +160,19 @@ class _HomePageState extends State<HomePage> {
       ),
       body: IndexedStack(
         index: _currentIndex,
-        children: pages,
+        children: [
+          HomeList(
+            pokeList: _pokeList,
+            favorites: _favorite,
+            onItemTap: widget.onItemTap,
+            onDoubleTap: _toggleFavoritePokemon,
+            getIndex: (pokemon) => widget.list.indexOf(pokemon),
+          ),
+          HomeFavorite(
+            pokeList: _favorite,
+            removeFavorite: _toggleFavoritePokemon,
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 8,
@@ -216,6 +195,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
         onPressed: () async {
           if (_pokeList.length == widget.list.length) {
             final String? selected = await showSearch(
@@ -245,7 +225,7 @@ class _HomePageState extends State<HomePage> {
           child: _pokeList.length != widget.list.length
               ? const Icon(Icons.close, key: ValueKey('icon1'))
               : const Icon(
-                  Icons.add,
+                  Icons.search,
                   key: ValueKey('icon2'),
                 ),
         ),

@@ -10,7 +10,7 @@ String formatNumber(int n) {
   } else if (n < 100 && n > 9) {
     zeros = '00';
   } else if (n < 1000 && n > 99) {
-    zeros = '000';
+    zeros = '0';
   } else {
     zeros = '';
   }
