@@ -16,7 +16,7 @@ class PokemonRepo implements IPokemonRepo {
   Future<List<Pokemon>> getAllPokemons() async {
     try {
       final response =
-          await dio.get('${ApiConsts.pokeapiURL}pokemon?limit=150');
+          await dio.get('${ApiConsts.pokeapiURL}pokemon?limit=400');
       List<Pokemon> list = [];
       for (final p in response.data['results']) {
         final pResponse =
