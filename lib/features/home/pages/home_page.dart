@@ -154,6 +154,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         title: const Text('Pokedex'),
@@ -176,6 +177,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 8,
+        selectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: _onItemTapped,

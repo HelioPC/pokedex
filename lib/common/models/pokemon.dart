@@ -73,7 +73,7 @@ class Pokemon {
       case 'ghost':
         return Colors.indigo[400];
       case 'dark':
-        return Colors.brown;
+        return Colors.black;
       case 'dragon':
         return Colors.indigo[800];
       case 'steel':
