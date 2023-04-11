@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/widgets/custom_button.dart';
+import 'package:pokedex/features/home/container/home_container.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({Key? key}) : super(key: key);
@@ -13,24 +14,17 @@ class IntroPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /*Stack(
+            Stack(
               children: [
                 Image.asset(
-                  "assets/imgs/intro.png",
+                  "lib/assets/images/intro.png",
                   fit: BoxFit.cover,
                 ),
-                Positioned(
-                  left: 30,
-                  child: Image.asset(
-                    "assets/imgs/logo.png",
-                    width: 100,
-                  ),
-                )
               ],
             ),
             const Text.rich(
               TextSpan(
-                  text: 'Explore o mundo\ndos ',
+                  text: 'Explore the world\nof ',
                   style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w700,
@@ -38,7 +32,7 @@ class IntroPage extends StatelessWidget {
                       height: 1.1),
                   children: <InlineSpan>[
                     TextSpan(
-                      text: 'Pokémons',
+                      text: 'Pokemons',
                       style: TextStyle(color: Color(0xffEA686D)),
                     )
                   ]),
@@ -48,16 +42,20 @@ class IntroPage extends StatelessWidget {
               height: 10,
             ),
             const Text(
-              "Descubra todas as espécies de Pokémons",
-              style: TextStyle(fontFamily: "Nunito", color: Color(0xff2F3E77)),
+              "Discover all Pokemon species",
+              style: TextStyle(color: Color(0xff2F3E77)),
             ),
             const SizedBox(
-              height: 15,
+              height: 25,
             ),
             CustomButton(
-              title: "Começar",
-              ontap: () {},
-            )*/
+              title: "Start",
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const HomeContainer(),
+                ));
+              },
+            )
           ],
         ),
       ),

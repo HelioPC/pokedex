@@ -33,7 +33,6 @@ class _DetailContainerState extends ConsumerState<DetailContainer> {
       initialPage: widget.args.index!,
     );
     _pokemon = widget.args.currentPokemon;
-    print(_pokemon);
     list = ref.read(pokemonDataProvider).value ?? [];
     super.initState();
   }
