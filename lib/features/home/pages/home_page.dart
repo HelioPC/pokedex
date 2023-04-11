@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
-import 'package:pokedex/features/details/container/detail_container.dart';
 import 'package:pokedex/features/home/pages/home_favorite.dart';
 import 'package:pokedex/features/home/pages/home_list.dart';
 
@@ -8,10 +7,8 @@ class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
     required this.list,
-    required this.onItemTap,
   }) : super(key: key);
   final List<Pokemon> list;
-  final Function(String, DetailArgs) onItemTap;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -165,7 +162,6 @@ class _HomePageState extends State<HomePage> {
           HomeList(
             pokeList: _pokeList,
             favorites: _favorite,
-            onItemTap: widget.onItemTap,
             onDoubleTap: _toggleFavoritePokemon,
             getIndex: (pokemon) => widget.list.indexOf(pokemon),
           ),

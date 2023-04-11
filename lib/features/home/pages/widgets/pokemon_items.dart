@@ -7,13 +7,11 @@ class PokemonItem extends StatefulWidget {
   const PokemonItem({
     Key? key,
     required this.pokemon,
-    required this.onTap,
     required this.index,
     required this.onDoubleTap,
     required this.loved,
   }) : super(key: key);
   final Pokemon pokemon;
-  final Function(String, DetailArgs) onTap;
   final Function(Pokemon pokemon) onDoubleTap;
   final int index;
   final bool loved;
@@ -27,13 +25,16 @@ class _PokemonItemState extends State<PokemonItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: () => widget.onDoubleTap(widget.pokemon),
-      onTap: () => widget.onTap(
-        '/details',
-        DetailArgs(
-          pokemon: widget.pokemon,
-          index: widget.index,
-        ),
-      ),
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => DetailContainer(
+            args: DetailArgs(
+              currentPokemon: widget.pokemon,
+              index: widget.index,
+            ),
+          ),
+        ));
+      },
       child: Stack(
         children: [
           Container(

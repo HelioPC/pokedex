@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
-import 'package:pokedex/features/details/container/detail_container.dart';
 import 'package:pokedex/features/home/pages/widgets/pokemon_items.dart';
 
 class HomeList extends StatelessWidget {
   const HomeList({
     Key? key,
     required this.pokeList,
-    required this.onItemTap,
     required this.onDoubleTap,
     required this.favorites,
     required this.getIndex,
@@ -15,7 +13,6 @@ class HomeList extends StatelessWidget {
 
   final List<Pokemon> pokeList;
   final List<Pokemon> favorites;
-  final Function(String, DetailArgs) onItemTap;
   final Function(Pokemon pokemon) onDoubleTap;
   final int Function(Pokemon pokemon) getIndex;
 
@@ -36,7 +33,6 @@ class HomeList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return PokemonItem(
                     pokemon: pokeList.elementAt(index),
-                    onTap: onItemTap,
                     onDoubleTap: onDoubleTap,
                     index: getIndex(pokeList.elementAt(index)),
                     loved: favorites.contains(pokeList.elementAt(index)),
