@@ -12,7 +12,7 @@ class Pokemon {
   final Map<String, dynamic> images;
   final Base base;
   final Evolution evolution;
-  final List<String> types;
+  final List<dynamic> types;
 
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(

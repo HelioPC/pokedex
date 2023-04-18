@@ -1,10 +1,10 @@
 class Evolution {
-  final List<String> prev;
-  final List<List<String>> next;
+  final List<dynamic> prev;
+  final List<dynamic> next;
 
   Evolution({required this.prev, required this.next});
 
   factory Evolution.fromMap(Map<String, dynamic> json) {
-    return Evolution(next: json['next'], prev: json['prev'] ?? []);
+    return Evolution(next: json['next'] ?? [], prev: json['prev'] ?? []);
   }
 }

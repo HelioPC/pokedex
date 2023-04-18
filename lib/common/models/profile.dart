@@ -2,8 +2,8 @@ class Profile {
   final String height;
   final String weight;
   final String gender;
-  final List<String> egg;
-  final List<List<String>> ability;
+  final List<dynamic> egg;
+  final List<dynamic> ability;
 
   Profile({
     required this.height,

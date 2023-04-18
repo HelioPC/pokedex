@@ -63,7 +63,9 @@ class _MySearchDelegate extends SearchDelegate<String> {
     final List<String> suggestions = query.isEmpty
         ? _history
         : _pokeList
-            .map((e) => e.name.contains(query) ? e.name : '')
+            .map((e) => (e.name['english'] as String).contains(query)
+                ? (e.name['english'] as String)
+                : '')
             .where((element) => element.contains(query))
             .toList();
 
@@ -126,7 +128,7 @@ class _HomePageState extends State<HomePage> {
           _pokeList = widget.list
               .where(
                 (e) =>
-                    e.name
+                    (e.name['english'] as String)
                         .toLowerCase()
                         .contains(_searchQuery.text.toLowerCase()) ||
                     '${e.id}'

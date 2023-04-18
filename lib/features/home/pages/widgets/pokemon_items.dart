@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
-import 'package:pokedex/features/details/container/detail_container.dart';
 import 'package:pokedex/features/home/pages/widgets/type.dart';
 
 class PokemonItem extends StatefulWidget {
@@ -25,16 +24,7 @@ class _PokemonItemState extends State<PokemonItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: () => widget.onDoubleTap(widget.pokemon),
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => DetailContainer(
-            args: DetailArgs(
-              currentPokemon: widget.pokemon,
-              index: widget.index,
-            ),
-          ),
-        ));
-      },
+      onTap: () {},
       child: Stack(
         children: [
           Container(
@@ -58,7 +48,7 @@ class _PokemonItemState extends State<PokemonItem> {
                     children: [
                       Flexible(
                         child: Text(
-                          widget.pokemon.name,
+                          (widget.pokemon.name['english'] as String),
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -94,7 +84,7 @@ class _PokemonItemState extends State<PokemonItem> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: widget.pokemon.types
-                            .map((e) => Types(name: e.type['name']))
+                            .map((e) => Types(name: e))
                             .toList(),
                       ),
                       const Flexible(
