@@ -11,19 +11,19 @@ class DetailBasicInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> infos = [
       {
-        'WEIGHT': '${pokemon.weight / 10} kg',
+        'WEIGHT': pokemon.profile.weight,
         'icon': Icons.balance,
       },
       {
-        'HEIGHT': '${pokemon.height / 10} m',
+        'HEIGHT': pokemon.profile.height,
         'icon': Icons.height,
       },
       {
-        'CATEGORY': toCapitalCase(pokemon.types[0].type['name']),
+        'CATEGORY': toCapitalCase(pokemon.types[0] as String),
         'icon': Icons.category,
       },
       {
-        'ABILITY': toCapitalCase(pokemon.abilities[0].ability['name']),
+        'ABILITY': toCapitalCase(pokemon.profile.ability[0][0]),
         'icon': Icons.catching_pokemon,
       },
     ];

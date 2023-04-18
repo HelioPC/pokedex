@@ -1,46 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/common/models/ability.dart';
-import 'package:pokedex/common/models/stats.dart';
-import 'package:pokedex/common/models/types.dart';
+import 'package:pokedex/common/models/base.dart';
+import 'package:pokedex/common/models/evolution.dart';
+import 'package:pokedex/common/models/profile.dart';
 
 class Pokemon {
   final int id;
-  final String name;
-  final int height;
-  final int weight;
-  final Map<String, dynamic> sprites;
-  final List<Types> types;
-  final List<Ability> abilities;
-  final List<Stats> stats;
+  final Map<String, dynamic> name;
+  final String description;
+  final String species;
+  final Profile profile;
+  final Map<String, dynamic> images;
+  final Base base;
+  final Evolution evolution;
+  final List<dynamic> types;
 
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(
       id: json['id'],
       name: json['name'],
-      height: json['height'],
-      weight: json['weight'],
-      sprites: json['sprites'],
-      types: List<Types>.from(json['types'].map((x) => Types.fromMap(x))),
-      abilities:
-          List<Ability>.from(json['abilities'].map((x) => Ability.fromMap(x))),
-      stats: List<Stats>.from(json['stats'].map((x) => Stats.fromMap(x))),
+      description: json['description'],
+      species: json['species'],
+      profile: Profile.fromMap(json['profile']),
+      images: json['image'],
+      base: Base.fromMap(json['base']),
+      evolution: Evolution.fromMap(json['evolution']),
+      types: json['type'],
     );
   }
 
-  Color? get baseColor => getColor(type: types[0].type['name'] ?? 'normal');
+  Pokemon({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.species,
+    required this.profile,
+    required this.images,
+    required this.base,
+    required this.evolution,
+    required this.types,
+  });
+
+  Color? get baseColor => getColor(type: types[0]);
   String get image =>
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
-
-  Pokemon({
-    required this.stats,
-    required this.abilities,
-    required this.types,
-    required this.sprites,
-    required this.height,
-    required this.weight,
-    required this.name,
-    required this.id,
-  });
 
   static Color? getColor({required String type}) {
     switch (type.toLowerCase()) {

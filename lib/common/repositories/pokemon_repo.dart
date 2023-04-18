@@ -1,28 +1,26 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pokedex/common/consts/api.dart';
 import 'package:pokedex/common/error/failure.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 
-final pokemonProvider = Provider((ref) => PokemonRepo(dio: Dio()));
+final pokemonProvider = Provider((ref) => PokemonRepo());
 
 class PokemonRepo {
-  final Dio dio;
-
-  PokemonRepo({required this.dio});
-
   Future<List<Pokemon>> getAllPokemons() async {
     try {
       final response =
-          await dio.get('${ApiConsts.pokeapiURL}pokemon?limit=400');
-      List<Pokemon> list = [];
-      for (final p in response.data['results']) {
-        final pResponse =
-            await dio.get('${ApiConsts.pokeapiURL}pokemon/${p['name']}');
-        list.add(Pokemon.fromMap(pResponse.data));
-      }
-      return list;
+          await rootBundle.loadString('lib/assets/json/pokemons.json');
+      final data = await json.decode(response);
+
+      return (data as List)
+          .sublist(0, 809)
+          .map((e) => Pokemon.fromMap(e))
+          .toList();
     } catch (e) {
+      print('Ocorreu um erro');
+      print(e.toString());
       throw Failure(msg: 'Não foi possível carregar os dados');
     }
   }

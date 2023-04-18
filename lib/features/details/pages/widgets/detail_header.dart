@@ -18,7 +18,7 @@ class DetailHeader extends StatelessWidget {
           height: 20,
         ),
         Text(
-          toCapitalCase(pokemon.name),
+          toCapitalCase((pokemon.name['english'] as String)),
           style: const TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
@@ -58,22 +58,22 @@ class DetailHeader extends StatelessWidget {
                 vertical: 4,
               ),
               backgroundColor: Pokemon.getColor(
-                type: pokemon.types.elementAt(index).type['name'],
+                type: pokemon.types.elementAt(index),
               )!
                   .withOpacity(.7),
               avatar: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: choose(
-                  pokemon.types.elementAt(index).type['name'],
+                  pokemon.types.elementAt(index),
                   customSize: 20,
                   color: Pokemon.getColor(
-                        type: pokemon.types.elementAt(index).type['name'],
+                        type: pokemon.types.elementAt(index),
                       ) ??
                       Colors.grey,
                 ),
               ),
               label: Text(
-                toCapitalCase(pokemon.types.elementAt(index).type['name']),
+                toCapitalCase(pokemon.types.elementAt(index)),
                 style: const TextStyle(fontSize: 18),
               ),
             ),

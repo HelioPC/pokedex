@@ -49,7 +49,8 @@ class _HomeFavoriteState extends State<HomeFavorite> {
                             ),
                             const SizedBox(width: 20),
                             Text(
-                              widget.pokeList[index].name,
+                              (widget.pokeList[index].name['english']
+                                  as String),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
