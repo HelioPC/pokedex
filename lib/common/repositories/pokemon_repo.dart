@@ -19,8 +19,6 @@ class PokemonRepo {
           .map((e) => Pokemon.fromMap(e))
           .toList();
     } catch (e) {
-      print('Ocorreu um erro');
-      print(e.toString());
       throw Failure(msg: 'Não foi possível carregar os dados');
     }
   }
