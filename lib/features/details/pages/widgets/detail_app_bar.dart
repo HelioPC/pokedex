@@ -31,7 +31,7 @@ class DetailAppBar extends StatelessWidget {
         duration: const Duration(milliseconds: 350),
         opacity: isOnTop ? 0 : 1,
         child: Text(
-          pokemon.name,
+          (pokemon.name['english'] as String),
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
