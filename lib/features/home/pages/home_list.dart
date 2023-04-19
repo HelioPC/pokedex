@@ -23,13 +23,11 @@ class HomeList extends StatelessWidget {
           ? Padding(
               padding:
                   const EdgeInsets.only(top: 0, left: 24, right: 24, bottom: 0),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                ),
+              child: ListView.separated(
                 itemCount: pokeList.length,
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 25);
+                },
                 itemBuilder: (context, index) {
                   return PokemonItem(
                     pokemon: pokeList.elementAt(index),
