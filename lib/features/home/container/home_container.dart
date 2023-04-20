@@ -8,24 +8,11 @@ class HomeContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(pokemonDataProvider).when(
-      data: (data) {
-        return HomePage(list: data);
-      },
-      error: (error, trace) {
-        return const Scaffold(
-          body: Center(
-            child: Text('Something went wrong'),
-          ),
-        );
-      },
-      loading: () {
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(color: Colors.red),
-          ),
-        );
-      },
-    );
+    final data = ref.watch(pokemonDataProvider);
+    return data.isEmpty
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : HomePage(list: data);
   }
 }

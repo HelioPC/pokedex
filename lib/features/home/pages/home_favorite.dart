@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/common/models/pokemon.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/common/providers/pokemon_data_provider.dart';
 
-class HomeFavorite extends StatefulWidget {
-  const HomeFavorite(
-      {Key? key, required this.pokeList, required this.removeFavorite})
-      : super(key: key);
-
-  final List<Pokemon> pokeList;
-  final Function(Pokemon pokemon) removeFavorite;
+class HomeFavorite extends ConsumerWidget {
+  const HomeFavorite({Key? key}) : super(key: key);
 
   @override
-  State<HomeFavorite> createState() => _HomeFavoriteState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(favouritesProvider);
 
-class _HomeFavoriteState extends State<HomeFavorite> {
-  @override
-  Widget build(BuildContext context) {
-    return widget.pokeList.isEmpty
+    return data.isEmpty
         ? const Center(
-            child: Text('No pokemons available'),
+            child: Text('No favourites pokemons'),
           )
         : Padding(
             padding: const EdgeInsets.all(20),
@@ -28,11 +21,11 @@ class _HomeFavoriteState extends State<HomeFavorite> {
                 mainAxisSpacing: 16,
                 childAspectRatio: 400 / 100,
               ),
-              itemCount: widget.pokeList.length,
+              itemCount: data.length,
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: widget.pokeList[index].baseColor,
+                    color: data[index].baseColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
@@ -43,14 +36,13 @@ class _HomeFavoriteState extends State<HomeFavorite> {
                         Row(
                           children: [
                             Image.network(
-                              widget.pokeList[index].image,
+                              data[index].image,
                               width: 70,
                               height: 70,
                             ),
                             const SizedBox(width: 20),
                             Text(
-                              (widget.pokeList[index].name['english']
-                                  as String),
+                              (data[index].name['english'] as String),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -62,7 +54,9 @@ class _HomeFavoriteState extends State<HomeFavorite> {
                         IconButton(
                           highlightColor: Colors.white.withOpacity(.2),
                           onPressed: () {
-                            widget.removeFavorite(widget.pokeList[index]);
+                            ref
+                                .read(pokemonDataProvider.notifier)
+                                .toggleFavorite(data[index].id);
                           },
                           icon: const Icon(
                             Icons.delete,

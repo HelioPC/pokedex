@@ -167,10 +167,7 @@ class _HomePageState extends State<HomePage> {
             onDoubleTap: _toggleFavoritePokemon,
             getIndex: (pokemon) => widget.list.indexOf(pokemon),
           ),
-          HomeFavorite(
-            pokeList: _favorite,
-            removeFavorite: _toggleFavoritePokemon,
-          ),
+          const HomeFavorite(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

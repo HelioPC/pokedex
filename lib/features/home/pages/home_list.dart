@@ -31,9 +31,7 @@ class HomeList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return PokemonItem(
                     pokemon: pokeList.elementAt(index),
-                    onDoubleTap: onDoubleTap,
                     index: getIndex(pokeList.elementAt(index)),
-                    loved: favorites.contains(pokeList.elementAt(index)),
                   );
                 },
               ),

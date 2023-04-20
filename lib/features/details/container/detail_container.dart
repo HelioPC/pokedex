@@ -26,15 +26,16 @@ class _DetailContainerState extends ConsumerState<DetailContainer> {
   late PageController controller;
   Pokemon? _pokemon;
   late List<Pokemon> list;
+
   @override
   void initState() {
+    super.initState();
     controller = PageController(
       viewportFraction: .6,
       initialPage: widget.args.index!,
     );
     _pokemon = widget.args.currentPokemon;
-    list = ref.read(pokemonDataProvider).value ?? [];
-    super.initState();
+    list = ref.read(pokemonDataProvider);
   }
 
   @override

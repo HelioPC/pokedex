@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/common/models/pokemon.dart';
+import 'package:pokedex/common/providers/pokemon_data_provider.dart';
 import 'package:pokedex/common/utils/string.dart';
 import 'package:pokedex/common/widgets/pokemonTypeLabelsRow.dart';
 import 'package:pokedex/features/details/container/detail_container.dart';
 
-class PokemonItem extends StatefulWidget {
+class PokemonItem extends ConsumerStatefulWidget {
   const PokemonItem({
     Key? key,
     required this.pokemon,
     required this.index,
-    required this.onDoubleTap,
-    required this.loved,
   }) : super(key: key);
   final Pokemon pokemon;
-  final Function(Pokemon pokemon) onDoubleTap;
   final int index;
-  final bool loved;
 
   @override
-  State<PokemonItem> createState() => _PokemonItemState();
+  ConsumerState<PokemonItem> createState() => _PokemonItemState();
 }
 
-class _PokemonItemState extends State<PokemonItem> {
+class _PokemonItemState extends ConsumerState<PokemonItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () => widget.onDoubleTap(widget.pokemon),
+      onDoubleTap: () {
+        ref
+            .read(pokemonDataProvider.notifier)
+            .toggleFavorite(widget.pokemon.id);
+      },
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => DetailContainer(
@@ -116,7 +118,7 @@ class _PokemonItemState extends State<PokemonItem> {
                         ),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: widget.loved
+                      child: widget.pokemon.favorite
                           ? const Icon(
                               Icons.favorite,
                               color: Colors.red,
