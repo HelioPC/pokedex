@@ -13,6 +13,7 @@ class Pokemon {
   final Base base;
   final Evolution evolution;
   final List<dynamic> types;
+  bool favorite = false;
 
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(
@@ -25,6 +26,7 @@ class Pokemon {
       base: Base.fromMap(json['base']),
       evolution: Evolution.fromMap(json['evolution']),
       types: json['type'],
+      favorite: false,
     );
   }
 
@@ -38,7 +40,23 @@ class Pokemon {
     required this.base,
     required this.evolution,
     required this.types,
+    this.favorite = false,
   });
+
+  Pokemon copyWith({required bool isFavorite}) {
+    return Pokemon(
+      id: id,
+      name: name,
+      description: description,
+      species: species,
+      profile: profile,
+      images: images,
+      base: base,
+      evolution: evolution,
+      types: types,
+      favorite: isFavorite,
+    );
+  }
 
   Color? get baseColor => getColor(type: types[0]);
   String get image =>

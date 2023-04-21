@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/common/error/failure.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 
-final pokemonProvider = Provider((ref) => PokemonRepo());
+final pokemonRepoProvider = Provider((ref) => PokemonRepo());
 
 class PokemonRepo {
   Future<List<Pokemon>> getAllPokemons() async {

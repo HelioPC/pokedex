@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/features/home/pages/widgets/pokemon_items.dart';
 
-class HomeList extends StatelessWidget {
+class HomeList extends StatefulWidget {
   const HomeList({
     Key? key,
     required this.pokeList,
@@ -17,25 +17,26 @@ class HomeList extends StatelessWidget {
   final int Function(Pokemon pokemon) getIndex;
 
   @override
+  State<HomeList> createState() => _HomeListState();
+}
+
+class _HomeListState extends State<HomeList> {
+  @override
   Widget build(BuildContext context) {
     return Container(
-      child: pokeList.isNotEmpty
+      child: widget.pokeList.isNotEmpty
           ? Padding(
               padding:
                   const EdgeInsets.only(top: 0, left: 24, right: 24, bottom: 0),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                ),
-                itemCount: pokeList.length,
+              child: ListView.separated(
+                itemCount: widget.pokeList.length,
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 25);
+                },
                 itemBuilder: (context, index) {
                   return PokemonItem(
-                    pokemon: pokeList.elementAt(index),
-                    onDoubleTap: onDoubleTap,
-                    index: getIndex(pokeList.elementAt(index)),
-                    loved: favorites.contains(pokeList.elementAt(index)),
+                    pokemon: widget.pokeList.elementAt(index),
+                    index: widget.getIndex(widget.pokeList.elementAt(index)),
                   );
                 },
               ),
