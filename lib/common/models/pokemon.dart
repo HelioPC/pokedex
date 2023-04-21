@@ -43,7 +43,7 @@ class Pokemon {
     this.favorite = false,
   });
 
-  Pokemon copyWith({bool? isFavorite}) {
+  Pokemon copyWith({required bool isFavorite}) {
     return Pokemon(
       id: id,
       name: name,
@@ -54,7 +54,7 @@ class Pokemon {
       base: base,
       evolution: evolution,
       types: types,
-      favorite: isFavorite ?? favorite,
+      favorite: isFavorite,
     );
   }
 

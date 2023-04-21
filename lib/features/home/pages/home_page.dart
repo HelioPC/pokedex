@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
         index: _currentIndex,
         children: [
           HomeList(
-            pokeList: _pokeList,
+            pokeList: widget.list,
             favorites: _favorite,
             onDoubleTap: _toggleFavoritePokemon,
             getIndex: (pokemon) => widget.list.indexOf(pokemon),
