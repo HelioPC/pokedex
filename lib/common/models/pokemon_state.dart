@@ -6,12 +6,11 @@ import 'package:pokedex/common/models/pokemon.dart';
 
 class PokemonState with ChangeNotifier {
   List<Pokemon> _list = [];
-  List<Pokemon> _favorites = [];
   bool _error = false;
   String _errorMessage = '';
 
   List<Pokemon> get list => _list;
-  List<Pokemon> get favorites => _favorites;
+  List<Pokemon> get favorites => _list.where((p) => p.favorite).toList();
   bool get hasError => _error;
   String get errorMessage => _errorMessage;
 
@@ -29,8 +28,6 @@ class PokemonState with ChangeNotifier {
           .sublist(0, 809)
           .map((e) => Pokemon.fromMap(e))
           .toList();
-
-      _favorites = _list.where((p) => p.favorite).toList();
 
       _error = false;
       _errorMessage = '';
