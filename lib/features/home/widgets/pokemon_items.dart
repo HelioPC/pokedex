@@ -100,7 +100,7 @@ class PokemonItem extends StatelessWidget {
                           icon: pokemon.favorite
                               ? const Icon(
                                   Icons.favorite,
-                                  color: Colors.red,
+                                  color: Colors.white,
                                 )
                               : const Icon(
                                   Icons.favorite_border_outlined,

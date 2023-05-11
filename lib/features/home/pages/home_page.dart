@@ -52,13 +52,10 @@ class _HomePageState extends State<HomePage> {
                       ? Center(
                           child: Text(value.errorMessage),
                         )
-                      : IndexedStack(
-                          index: _currentIndex,
-                          children: const <Widget>[
-                            HomeList(),
-                            HomeFavorite(),
-                          ],
-                        );
+                      : const [
+                          HomeList(),
+                          HomeFavorite(),
+                        ][_currentIndex];
             },
           )),
       bottomNavigationBar: BottomNavigationBar(
