@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
-import 'package:pokedex/features/details/pages/widgets/detail_app_bar.dart';
-import 'package:pokedex/features/details/pages/widgets/detail_header.dart';
-import 'package:pokedex/features/details/pages/widgets/detail_list.dart';
+import 'package:pokedex/features/details/widgets/detail_app_bar.dart';
+import 'package:pokedex/features/details/widgets/detail_header.dart';
+import 'package:pokedex/features/details/widgets/detail_list.dart';
 
 class DetailPage extends StatefulWidget {
   final Pokemon pokemon;

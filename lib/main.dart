@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/initial_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Pokedex 2k22',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => PokemonState(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Pokedex 2k22',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+        ),
+        home: const InitialPage(),
       ),
-      home: const IntroPage(),
     );
   }
 }
