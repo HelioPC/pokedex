@@ -3,7 +3,7 @@ import 'package:pokedex/common/models/base.dart';
 import 'package:pokedex/common/models/evolution.dart';
 import 'package:pokedex/common/models/profile.dart';
 
-class Pokemon {
+class Pokemon with ChangeNotifier {
   final int id;
   final Map<String, dynamic> name;
   final String description;
@@ -13,7 +13,7 @@ class Pokemon {
   final Base base;
   final Evolution evolution;
   final List<dynamic> types;
-  bool favorite = false;
+  bool favorite;
 
   factory Pokemon.fromMap(Map<String, dynamic> json) {
     return Pokemon(
@@ -42,6 +42,11 @@ class Pokemon {
     required this.types,
     this.favorite = false,
   });
+
+  void toggleFavorite() {
+    favorite = !favorite;
+    notifyListeners();
+  }
 
   Pokemon copyWith({required bool isFavorite}) {
     return Pokemon(

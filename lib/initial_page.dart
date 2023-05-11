@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/common/widgets/custom_button.dart';
-import 'package:pokedex/features/home/container/home_container.dart';
+import 'package:pokedex/features/home/pages/home_page.dart';
+import 'package:provider/provider.dart';
 
-class IntroPage extends StatelessWidget {
-  const IntroPage({Key? key}) : super(key: key);
+class InitialPage extends StatelessWidget {
+  const InitialPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    context.read<PokemonState>().fetchPokemons();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -52,7 +55,7 @@ class IntroPage extends StatelessWidget {
               title: "Start",
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const HomeContainer(),
+                  builder: (context) => const HomePage(),
                 ));
               },
             )
