@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
+import 'package:pokedex/common/routes/routes.dart';
 import 'package:pokedex/common/widgets/custom_button.dart';
-import 'package:pokedex/features/home/pages/home_page.dart';
 import 'package:provider/provider.dart';
 
 class InitialPage extends StatelessWidget {
@@ -54,9 +54,7 @@ class InitialPage extends StatelessWidget {
             CustomButton(
               title: "Start",
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ));
+                Navigator.of(context).pushReplacementNamed(Routes.home);
               },
             )
           ],
