@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/features/details/pages/detail_page.dart';
 import 'package:pokedex/features/home/pages/home_page.dart';
 import 'package:pokedex/initial_page.dart';
 
@@ -12,7 +13,7 @@ class Routes {
       case welcome:
         return MaterialPageRoute(builder: (context) => const InitialPage());
       case detail:
-        return MaterialPageRoute(builder: (context) => const HomePage());
+        return MaterialPageRoute(builder: (context) => const DetailPage());
       case home:
         return MaterialPageRoute(builder: (context) => const HomePage());
       default:

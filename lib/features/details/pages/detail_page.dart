@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
+import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/features/details/widgets/detail_app_bar.dart';
 import 'package:pokedex/features/details/widgets/detail_header.dart';
 import 'package:pokedex/features/details/widgets/detail_list.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatefulWidget {
-  final Pokemon pokemon;
-  final List<Pokemon> list;
-  final VoidCallback onBack;
-  final PageController controller;
-  final ValueChanged<Pokemon> onChangePokemon;
-
   const DetailPage({
     Key? key,
-    required this.pokemon,
-    required this.list,
-    required this.onBack,
-    required this.controller,
-    required this.onChangePokemon,
   }) : super(key: key);
 
   @override
@@ -36,6 +27,15 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PokemonState>(context, listen: true);
+    final list = provider.list;
+    final pokemon = provider.currentPokemon;
+
+    PageController controller = PageController(
+      viewportFraction: .6,
+      initialPage: provider.getPokemonIndex(pokemon),
+    );
+
     return Scaffold(
       body: NotificationListener(
         onNotification: ((notification) {
@@ -53,15 +53,19 @@ class _DetailPageState extends State<DetailPage> {
           physics: const ClampingScrollPhysics(),
           slivers: [
             DetailAppBar(
-              pokemon: widget.pokemon,
-              onBack: widget.onBack,
+              pokemon: pokemon,
+              onBack: () => Navigator.of(context).pop(),
               isOnTop: isOnTop,
             ),
             DetailList(
-              pokemon: widget.pokemon,
-              list: widget.list,
-              controller: widget.controller,
-              onChangePokemon: widget.onChangePokemon,
+              pokemon: pokemon,
+              list: list,
+              controller: controller,
+              onChangePokemon: (Pokemon pokemon) {
+                setState(() {
+                  provider.setCurrentPokemon(pokemon);
+                });
+              },
             ),
             SliverToBoxAdapter(
               child: SizedBox(
@@ -73,7 +77,7 @@ class _DetailPageState extends State<DetailPage> {
                       color: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(20),
-                        child: DetailHeader(pokemon: widget.pokemon),
+                        child: DetailHeader(pokemon: pokemon),
                       ),
                     ),
                   ],
