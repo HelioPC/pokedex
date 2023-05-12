@@ -6,13 +6,20 @@ import 'package:pokedex/common/models/pokemon.dart';
 
 class PokemonState with ChangeNotifier {
   List<Pokemon> _list = [];
+  Pokemon? _currentPokemon;
   bool _error = false;
   String _errorMessage = '';
 
   List<Pokemon> get list => _list;
   List<Pokemon> get favorites => _list.where((p) => p.favorite).toList();
+  Pokemon get currentPokemon => _currentPokemon!;
   bool get hasError => _error;
   String get errorMessage => _errorMessage;
+
+  void setCurrentPokemon(Pokemon pokemon) {
+    _currentPokemon = pokemon;
+    notifyListeners();
+  }
 
   int getPokemonIndex(Pokemon pokemon) {
     return _list.indexOf(pokemon);

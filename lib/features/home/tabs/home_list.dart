@@ -25,7 +25,7 @@ class HomeList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return ChangeNotifierProvider.value(
                         value: state.list[index],
-                        child: PokemonItem(),
+                        child: const PokemonItem(),
                       );
                     },
                   ),

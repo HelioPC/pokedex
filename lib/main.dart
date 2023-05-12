@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
+import 'package:pokedex/common/routes/routes.dart';
 import 'package:pokedex/initial_page.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.red,
         ),
         home: const InitialPage(),
+        onGenerateRoute: Routes.onGenerateRoute,
       ),
     );
   }

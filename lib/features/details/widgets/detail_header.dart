@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/common/utils/string.dart';
-import 'package:pokedex/common/widgets/pokemonTypeLabelsRow.dart';
+import 'package:pokedex/common/widgets/pokemon_type_labels_row.dart';
 import 'package:pokedex/features/details/widgets/detail_basic_info.dart';
 
 class DetailHeader extends StatelessWidget {
