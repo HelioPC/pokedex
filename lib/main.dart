@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/common/routes/routes.dart';
-import 'package:pokedex/initial_page.dart';
+import 'package:pokedex/features/onboard/initial_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Pokedex 2k22',
         theme: ThemeData(
-          primarySwatch: Colors.red,
+          primarySwatch: Colors.blue,
         ),
         home: const InitialPage(),
         onGenerateRoute: Routes.onGenerateRoute,

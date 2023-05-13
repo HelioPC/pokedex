@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/features/details/pages/detail_page.dart';
 import 'package:pokedex/features/home/pages/home_page.dart';
-import 'package:pokedex/initial_page.dart';
+import 'package:pokedex/features/onboard/initial_page.dart';
 
 class Routes {
   static const String welcome = 'welcome';
