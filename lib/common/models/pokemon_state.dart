@@ -16,6 +16,11 @@ class PokemonState with ChangeNotifier {
   bool get hasError => _error;
   String get errorMessage => _errorMessage;
 
+  void removeFavorite(Pokemon pokemon) {
+    pokemon.toggleFavorite();
+    notifyListeners();
+  }
+
   void setCurrentPokemon(Pokemon pokemon) {
     _currentPokemon = pokemon;
     notifyListeners();
