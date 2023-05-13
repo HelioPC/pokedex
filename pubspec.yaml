@@ -15,6 +15,20 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
+  flutter_native_splash: ^2.2.19
+
+flutter_native_splash:
+  color: '#000029'
+  color_dark: '#000029'
+  image: 'lib/assets/images/splash_image.png'
+  image_dark: 'lib/assets/images/splash_image.png'
+  android_12:
+    color: "#000029"
+    color_dark: "#000029"
+    image: lib/assets/images/splash_image.png
+    image_dark: lib/assets/images/splash_image.png
+    icon_background_color: "#000029"
+    icon_background_color_dark: "#000029"
 
 dev_dependencies:
   flutter_test:
