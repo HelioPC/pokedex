@@ -37,30 +37,27 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         title: const Text('Pokedex'),
       ),
-      body: RefreshIndicator(
-          onRefresh: () async {},
-          child: Consumer<PokemonState>(
-            builder: (context, value, child) {
-              return value.list.isEmpty && !value.hasError
-                  ? const CircularProgressIndicator()
-                  : value.hasError
-                      ? Center(
-                          child: Text(value.errorMessage),
-                        )
-                      : const [
-                          HomeList(),
-                          HomeFavorite(),
-                        ][_currentIndex];
-            },
-          )),
+      body: Consumer<PokemonState>(
+        builder: (context, value, child) {
+          return value.list.isEmpty && !value.hasError
+              ? const CircularProgressIndicator()
+              : value.hasError
+                  ? Center(
+                      child: Text(value.errorMessage),
+                    )
+                  : const [
+                      HomeList(),
+                      HomeFavorite(),
+                    ][_currentIndex];
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 8,
-        selectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
@@ -78,24 +75,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        onPressed: () async {},
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          transitionBuilder: (child, anim) => RotationTransition(
-            turns: child.key == const ValueKey('icon1')
-                ? Tween<double>(begin: 1, end: 0.75).animate(anim)
-                : Tween<double>(begin: 0.75, end: 1).animate(anim),
-            child: FadeTransition(opacity: anim, child: child),
-          ),
-          child: const Icon(
-            Icons.search,
-            key: ValueKey('icon2'),
-          ),
-        ),
       ),
     );
   }

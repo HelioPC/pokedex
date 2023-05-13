@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
+import 'package:pokedex/common/routes/routes.dart';
 import 'package:pokedex/features/onboard/widgets/dot_indicator.dart';
 import 'package:pokedex/features/onboard/widgets/on_board_content.dart';
 import 'package:provider/provider.dart';
@@ -96,7 +97,10 @@ class _InitialPageState extends State<InitialPage> {
                     replacement: SizedBox(
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(Routes.home);
+                        },
                         style: ElevatedButton.styleFrom(),
                         child: const Text('Vamos começar'),
                       ),
