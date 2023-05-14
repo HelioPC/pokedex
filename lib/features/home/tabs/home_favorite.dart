@@ -18,7 +18,10 @@ class HomeFavorite extends StatelessWidget {
               )
             : Padding(
                 padding: const EdgeInsets.all(20),
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 25,
+                  ),
                   itemCount: value.favorites.length,
                   itemBuilder: (context, index) {
                     return Dismissible(

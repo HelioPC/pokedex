@@ -15,14 +15,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => PokemonState(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Pokedex 2k22',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Pokedex 2k22',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: const InitialPage(),
+          onGenerateRoute: Routes.onGenerateRoute,
         ),
-        home: const InitialPage(),
-        onGenerateRoute: Routes.onGenerateRoute,
       ),
     );
   }
