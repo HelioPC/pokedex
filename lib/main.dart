@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: MaterialApp(
+          theme: ThemeData(
+            canvasColor: Colors.white,
+          ),
           debugShowCheckedModeBanner: false,
           title: 'Pokedex 2k22',
           home: const InitialPage(),

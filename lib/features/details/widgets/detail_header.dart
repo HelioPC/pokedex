@@ -47,6 +47,13 @@ class DetailHeader extends StatelessWidget {
           height: 47,
           child: PokemonTypeLabelsRow(pokemon: pokemon),
         ),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 15),
+          child: Text(
+            pokemon.description,
+            style: const TextStyle(fontSize: 14, letterSpacing: 0, height: 2),
+          ),
+        ),
         const Divider(),
         DetailBasicInfo(pokemon: pokemon),
       ],
