@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: const Color(0xFF173EA5),
         elevation: 8,
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(
-              Icons.home,
+              Icons.catching_pokemon,
             ),
           ),
           BottomNavigationBarItem(

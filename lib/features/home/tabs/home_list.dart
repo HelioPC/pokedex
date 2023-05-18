@@ -71,7 +71,7 @@ class _HomeListState extends State<HomeList> {
                         onChanged: (value) {
                           setState(() {
                             Provider.of<PokemonState>(context, listen: false)
-                                .searchPokemons(value);
+                                .searchPokemons(_searchText);
                           });
                         },
                         keyboardType: TextInputType.name,
@@ -85,7 +85,13 @@ class _HomeListState extends State<HomeList> {
                     ),
                     const SizedBox(width: 10),
                     GestureDetector(
-                      onTap: () => searchController.clear(),
+                      onTap: () {
+                        setState(() {
+                          searchController.clear();
+                          Provider.of<PokemonState>(context, listen: false)
+                              .searchPokemons('');
+                        });
+                      },
                       child: const Icon(
                         CupertinoIcons.clear_thick_circled,
                         color: Color.fromRGBO(128, 128, 128, 1),

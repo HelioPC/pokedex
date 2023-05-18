@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Pokedex 2k22',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
           home: const InitialPage(),
           onGenerateRoute: Routes.onGenerateRoute,
+          onUnknownRoute: (settings) => MaterialPageRoute(
+            builder: (context) => const InitialPage(),
+          ),
         ),
       ),
     );

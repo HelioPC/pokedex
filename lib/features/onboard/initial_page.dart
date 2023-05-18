@@ -95,19 +95,27 @@ class _InitialPageState extends State<InitialPage> {
                   Visibility(
                     visible: _pageIndex != onBoardDataContent.length - 1,
                     replacement: SizedBox(
-                      height: 50,
+                      height: 60,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context)
                               .pushReplacementNamed(Routes.home);
                         },
-                        style: ElevatedButton.styleFrom(),
-                        child: const Text('Vamos começar'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF173EA5),
+                        ),
+                        child: const Text(
+                          'Vamos começar',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                     child: SizedBox(
-                      height: 50,
-                      width: 50,
+                      height: 60,
+                      width: 60,
                       child: ElevatedButton(
                         onPressed: () {
                           _pageController.nextPage(
@@ -115,6 +123,7 @@ class _InitialPageState extends State<InitialPage> {
                               curve: Curves.ease);
                         },
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF173EA5),
                           shape: const CircleBorder(),
                         ),
                         child: const Icon(Icons.arrow_forward_ios),
