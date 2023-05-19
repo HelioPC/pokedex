@@ -29,7 +29,7 @@ class DetailBasicInfo extends StatelessWidget {
     ];
     return SizedBox(
       width: double.infinity,
-      height: 270,
+      height: 200,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -60,9 +60,7 @@ class DetailBasicInfo extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -70,14 +68,14 @@ class DetailBasicInfo extends StatelessWidget {
                       color: Color.fromARGB(255, 192, 192, 192)),
                 ),
                 elevation: 0,
-                child: SizedBox(
-                  height: 35,
+                child: Container(
+                  padding: const EdgeInsets.all(8),
                   width: double.infinity,
                   child: Center(
                     child: Text(
                       infos[index].values.first,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

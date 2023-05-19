@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/common/utils/string.dart';
 import 'package:pokedex/common/widgets/pokemon_type_labels_row.dart';
@@ -56,6 +57,11 @@ class DetailHeader extends StatelessWidget {
         ),
         const Divider(),
         DetailBasicInfo(pokemon: pokemon),
+        const Divider(),
+        GFProgressBar(
+          backgroundColor: Colors.grey,
+          progressBarColor: Colors.grey,
+        ),
       ],
     );
   }
