@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/common/utils/string.dart';
 import 'package:pokedex/common/widgets/pokemon_type_labels_row.dart';
@@ -52,15 +51,47 @@ class DetailHeader extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 15),
           child: Text(
             pokemon.description,
-            style: const TextStyle(fontSize: 14, letterSpacing: 0, height: 2),
+            style: const TextStyle(fontSize: 16, letterSpacing: 0, height: 1.5),
           ),
         ),
         const Divider(),
         DetailBasicInfo(pokemon: pokemon),
         const Divider(),
-        GFProgressBar(
-          backgroundColor: Colors.grey,
-          progressBarColor: Colors.grey,
+        SizedBox(
+          child: Column(
+            children: [
+              const Text(
+                'Gender',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
+              LinearProgressIndicator(
+                backgroundColor: Colors.red,
+                color: Colors.blue,
+                minHeight: 10,
+                value: pokemon.profile.maleGender / 100,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.male),
+                      Text('${pokemon.profile.maleGender.toString()} %'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.female),
+                      Text('${pokemon.profile.femaleGender.toString()} %'),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

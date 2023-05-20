@@ -47,15 +47,15 @@ class DetailBasicInfo extends StatelessWidget {
                 children: [
                   Icon(
                     infos.elementAt(index).values.last,
-                    color: Colors.grey,
+                    color: Colors.black54,
                     size: 20,
                   ),
                   const SizedBox(width: 10),
                   Text(
                     infos[index].keys.first,
                     style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
+                      color: Colors.black54,
+                      fontSize: 14,
                     ),
                   ),
                 ],
