@@ -27,64 +27,63 @@ class DetailBasicInfo extends StatelessWidget {
         'icon': Icons.catching_pokemon,
       },
     ];
-    return SizedBox(
-      width: double.infinity,
-      height: 200,
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          childAspectRatio: 1.8,
-        ),
-        itemCount: infos.length,
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    infos.elementAt(index).values.last,
-                    color: Colors.black54,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    infos[index].keys.first,
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: const BorderSide(
-                      color: Color.fromARGB(255, 192, 192, 192)),
-                ),
-                elevation: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  width: double.infinity,
-                  child: Center(
-                    child: Text(
-                      infos[index].values.first,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: SizedBox(
+        width: double.infinity,
+        child: Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          runSpacing: 20,
+          children: infos
+              .map(
+                (e) => SizedBox(
+                  width: 180,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            e.values.last,
+                            color: Colors.black54,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            e.keys.first,
+                            style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                      const SizedBox(height: 10),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: const Color.fromARGB(255, 192, 192, 192),
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        width: double.infinity,
+                        child: Center(
+                          child: Text(
+                            e.values.first,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )
-            ],
-          );
-        },
+              .toList(),
+        ),
       ),
     );
   }

@@ -59,7 +59,7 @@ class _InitialPageState extends State<InitialPage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(24),
           child: Column(
             children: [
               Expanded(
