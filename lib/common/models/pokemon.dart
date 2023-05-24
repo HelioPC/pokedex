@@ -66,6 +66,28 @@ class Pokemon with ChangeNotifier {
   Color? get baseColor => getColor(type: types[0]);
   String get image =>
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
+  static List<String> get pokemonTypes {
+    return [
+      'normal',
+      'fire',
+      'water',
+      'grass',
+      'electric',
+      'ice',
+      'fighting',
+      'poison',
+      'ground',
+      'flying',
+      'psychic',
+      'bug',
+      'rock',
+      'ghost',
+      'dark',
+      'dragon',
+      'steel',
+      'fairy',
+    ];
+  }
 
   static Color? getColor({required String type}) {
     switch (type.toLowerCase()) {

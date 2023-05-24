@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/features/home/widgets/filter_button.dart';
 import 'package:pokedex/features/home/widgets/pokemon_items.dart';
@@ -61,11 +62,34 @@ class _HomeListState extends State<HomeList> {
                 'Selecione o tipo',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
+              const SizedBox(height: 40),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 4,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 14);
+                  },
+                  itemCount: Pokemon.pokemonTypes.length,
                   itemBuilder: (context, index) {
-                    return const Text('Selecione o tipo');
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        height: 35,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: Pokemon.getColor(
+                              type: Pokemon.pokemonTypes[index],
+                            ),
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Center(
+                            child: Text(
+                          Pokemon.pokemonTypes[index],
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        )),
+                      ),
+                    );
                   },
                 ),
               )
