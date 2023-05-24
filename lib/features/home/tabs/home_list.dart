@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
+import 'package:pokedex/features/home/widgets/filter_button.dart';
 import 'package:pokedex/features/home/widgets/pokemon_items.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,46 @@ class _HomeListState extends State<HomeList> {
   void dispose() {
     searchController.dispose();
     super.dispose();
+  }
+
+  _showModalBottomSheetTypes() {
+    return showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                height: 4,
+                width: 30,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(.4),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Selecione o tipo',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return const Text('Selecione o tipo');
+                  },
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -105,15 +146,17 @@ class _HomeListState extends State<HomeList> {
                     ),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FilterButton(
-                        label: 'All types',
+                        onTap: () {},
+                        label: 'Min. id',
                       ),
                       FilterButton(
+                        onTap: _showModalBottomSheetTypes,
                         label: 'All types',
                       ),
                     ],
@@ -149,44 +192,6 @@ class _HomeListState extends State<HomeList> {
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class FilterButton extends StatelessWidget {
-  const FilterButton({
-    Key? key,
-    required this.label,
-  }) : super(key: key);
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 180,
-        margin: const EdgeInsets.only(top: 20),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(color: Colors.white),
-            ),
-            const Icon(
-              Icons.arrow_drop_down,
-              color: Colors.white,
-            ),
-          ],
-        ),
       ),
     );
   }
