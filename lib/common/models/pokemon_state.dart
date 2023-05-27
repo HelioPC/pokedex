@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pokedex/common/models/pokemon.dart';
+import 'package:pokedex/common/utils/string.dart';
 
 class PokemonState with ChangeNotifier {
   List<Pokemon> _list = [];
@@ -10,7 +11,9 @@ class PokemonState with ChangeNotifier {
   Pokemon? _currentPokemon;
   bool _error = false;
   String _errorMessage = '';
+  String _currentFilterType = '';
 
+  String get currentFilterType => _currentFilterType;
   List<Pokemon> get list => _list;
   List<Pokemon> get searchedPokemons => _searchPokemons;
   List<Pokemon> get favorites => _list.where((p) => p.favorite).toList();
@@ -18,19 +21,22 @@ class PokemonState with ChangeNotifier {
   bool get hasError => _error;
   String get errorMessage => _errorMessage;
 
-  void searchPokemons(String text) {
+  void filterPokemons(String text) {
     if (text.isEmpty) {
       _searchPokemons = list;
     } else {
-      _searchPokemons = list
-          .where(
-            (p) =>
-                (p.name['english'] as String)
-                    .toLowerCase()
-                    .contains(text.toLowerCase()) ||
-                p.id.toString().toLowerCase().contains(text.toLowerCase()),
-          )
-          .toList();
+      _searchPokemons = list.where(
+        (p) {
+          if (Pokemon.pokemonTypes.contains(text.toLowerCase())) {
+            return p.types.contains(toCapitalCase(text));
+          }
+
+          return (p.name['english'] as String)
+                  .toLowerCase()
+                  .contains(text.toLowerCase()) ||
+              p.id.toString().toLowerCase().contains(text.toLowerCase());
+        },
+      ).toList();
     }
     notifyListeners();
   }

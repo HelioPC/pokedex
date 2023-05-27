@@ -59,7 +59,7 @@ class _HomeListState extends State<HomeList> {
               ),
               const SizedBox(height: 20),
               const Text(
-                'Selecione o tipo',
+                'Choose pokemon type',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 40),
@@ -72,6 +72,12 @@ class _HomeListState extends State<HomeList> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
+                        Provider.of<PokemonState>(
+                          context,
+                          listen: false,
+                        ).filterPokemons(
+                          Pokemon.pokemonTypes[index],
+                        );
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -137,11 +143,8 @@ class _HomeListState extends State<HomeList> {
                           child: CupertinoTextField(
                             controller: searchController,
                             onChanged: (value) {
-                              setState(() {
-                                Provider.of<PokemonState>(context,
-                                        listen: false)
-                                    .searchPokemons(_searchText);
-                              });
+                              Provider.of<PokemonState>(context, listen: false)
+                                  .filterPokemons(_searchText);
                             },
                             keyboardType: TextInputType.name,
                             style: const TextStyle(
@@ -155,11 +158,9 @@ class _HomeListState extends State<HomeList> {
                         const SizedBox(width: 10),
                         GestureDetector(
                           onTap: () {
-                            setState(() {
-                              searchController.clear();
-                              Provider.of<PokemonState>(context, listen: false)
-                                  .searchPokemons('');
-                            });
+                            searchController.clear();
+                            Provider.of<PokemonState>(context, listen: false)
+                                .filterPokemons('');
                           },
                           child: const Icon(
                             CupertinoIcons.clear_thick_circled,
