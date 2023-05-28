@@ -14,9 +14,6 @@ class FilterTypeButton extends StatefulWidget {
 }
 
 class _FilterTypeButtonState extends State<FilterTypeButton> {
-  String label = 'All types';
-  Color background = Colors.black;
-
   _showModalBottomSheetTypes(BuildContext context) {
     return showModalBottomSheet(
       shape: RoundedRectangleBorder(
@@ -48,56 +45,50 @@ class _FilterTypeButtonState extends State<FilterTypeButton> {
                   direction: Axis.horizontal,
                   spacing: 20,
                   children: [
-                    ...Pokemon.pokemonTypes
-                        .map(
-                          (e) => GestureDetector(
-                            onTap: () {
-                              Provider.of<PokemonState>(
-                                context,
-                                listen: false,
-                              ).filterPokemons(
-                                toCapitalCase(e),
-                              );
-                              setState(() {
-                                label = e;
-                                background = Pokemon.getColor(
-                                      type: e,
-                                    ) ??
-                                    Colors.black;
-                              });
-                            },
-                            child: FilterChip(
-                              backgroundColor: Pokemon.getColor(
-                                type: e,
-                              )!
-                                  .withOpacity(.2),
-                              selectedColor: Pokemon.getColor(
-                                type: e,
-                              )!
-                                  .withOpacity(.5),
-                              selected: Provider.of<PokemonState>(context)
-                                  .typeFilters
-                                  .contains(toCapitalCase(e)),
-                              onSelected: (value) {
-                                if (value) {
-                                  Provider.of<PokemonState>(context,
-                                          listen: false)
-                                      .addTypeFilter(toCapitalCase(e));
-                                } else {
-                                  Provider.of<PokemonState>(context,
-                                          listen: false)
-                                      .removeTypeFilter(toCapitalCase(e));
-                                }
-                              },
-                              label: Text(
-                                e,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
-                              ),
+                    ...Pokemon.pokemonTypes.map((e) {
+                      final color = Pokemon.getColor(
+                        type: e,
+                      );
+                      return GestureDetector(
+                        onTap: () {
+                          Provider.of<PokemonState>(
+                            context,
+                            listen: false,
+                          ).filterPokemons(
+                            toCapitalCase(e),
+                          );
+                        },
+                        child: FilterChip(
+                          backgroundColor: color!.withOpacity(.8),
+                          checkmarkColor: color.computeLuminance() < .35
+                              ? Colors.white
+                              : Colors.black,
+                          selectedColor: color,
+                          selected: Provider.of<PokemonState>(context)
+                              .typeFilters
+                              .contains(toCapitalCase(e)),
+                          onSelected: (value) {
+                            if (value) {
+                              Provider.of<PokemonState>(context, listen: false)
+                                  .addTypeFilter(toCapitalCase(e));
+                            } else {
+                              Provider.of<PokemonState>(context, listen: false)
+                                  .removeTypeFilter(toCapitalCase(e));
+                            }
+                          },
+                          label: Text(
+                            e,
+                            style: TextStyle(
+                              color: color.computeLuminance() < .35
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
                           ),
-                        )
-                        .toList(),
+                        ),
+                      );
+                    }).toList(),
                     Visibility(
                       visible: Provider.of<PokemonState>(context)
                           .typeFilters
@@ -130,17 +121,17 @@ class _FilterTypeButtonState extends State<FilterTypeButton> {
         margin: const EdgeInsets.only(top: 20),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         decoration: BoxDecoration(
-          color: background,
+          color: Colors.black,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              label,
-              style: const TextStyle(color: Colors.white),
+              'Type',
+              style: TextStyle(color: Colors.white),
             ),
-            const Icon(
+            Icon(
               Icons.arrow_drop_down,
               color: Colors.white,
             ),

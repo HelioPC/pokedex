@@ -92,41 +92,41 @@ class Pokemon with ChangeNotifier {
   static Color? getColor({required String type}) {
     switch (type.toLowerCase()) {
       case 'normal':
-        return Colors.grey;
+        return const Color(0xFF919AA2);
       case 'fire':
-        return Colors.red;
+        return const Color(0xFFFF9D55);
       case 'water':
-        return Colors.blue;
+        return const Color(0xFF5090D6);
       case 'grass':
-        return Colors.green;
+        return const Color(0xFF63BC5A);
       case 'electric':
-        return Colors.amber;
+        return const Color(0xFFF4D23C);
       case 'ice':
-        return Colors.cyanAccent[400];
+        return const Color(0xFF73CEC0);
       case 'fighting':
-        return Colors.orange;
+        return const Color(0xFFCE416B);
       case 'poison':
-        return Colors.purple;
+        return const Color(0xFFB567CE);
       case 'ground':
-        return Colors.brown;
+        return const Color(0xFFD97845);
       case 'flying':
-        return Colors.indigo[200];
+        return const Color(0xFF89AAE3);
       case 'psychic':
-        return Colors.pink;
+        return const Color(0xFFFA7179);
       case 'bug':
-        return Colors.lightGreen[500];
+        return const Color(0xFF91C12F);
       case 'rock':
-        return Colors.grey;
+        return const Color(0xFFC5B78C);
       case 'ghost':
-        return Colors.indigo[400];
+        return const Color(0xFF5269AD);
       case 'dark':
-        return Colors.black;
+        return const Color(0xFF5A5465);
       case 'dragon':
-        return Colors.indigo[800];
+        return const Color(0xFF0B6DC3);
       case 'steel':
-        return Colors.blueGrey;
+        return const Color(0xFF5A8EA2);
       case 'fairy':
-        return Colors.pinkAccent[100];
+        return const Color(0xFFEC8FE6);
       default:
         return Colors.grey;
     }

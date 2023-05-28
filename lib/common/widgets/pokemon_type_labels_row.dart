@@ -16,39 +16,39 @@ class PokemonTypeLabelsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: pokemon.types
-          .map(
-            (type) => Padding(
-              padding: padding ?? const EdgeInsets.all(8.0),
-              child: Chip(
-                elevation: 5,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 5,
-                  vertical: 5,
-                ),
-                backgroundColor: Pokemon.getColor(
-                  type: type,
-                )!
-                    .withOpacity(.8),
-                avatar: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: choose(
-                    type,
-                    customSize: 20,
-                    color: Pokemon.getColor(
-                          type: type,
-                        ) ??
-                        Colors.grey,
-                  ),
-                ),
-                label: Text(
-                  toCapitalCase(type),
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
+      children: pokemon.types.map((type) {
+        final color = Pokemon.getColor(
+          type: type,
+        );
+        return Padding(
+          padding: padding ?? const EdgeInsets.all(8.0),
+          child: Chip(
+            elevation: 5,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+              vertical: 5,
+            ),
+            backgroundColor: color,
+            avatar: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: choose(
+                type,
+                customSize: 20,
+                color: color ?? Colors.grey,
               ),
             ),
-          )
-          .toList(),
+            label: Text(
+              toCapitalCase(type),
+              style: TextStyle(
+                color: color!.computeLuminance() < .35
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }

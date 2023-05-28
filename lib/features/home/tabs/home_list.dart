@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/features/home/widgets/filter_type_button.dart';
 import 'package:pokedex/features/home/widgets/pokemon_items.dart';
@@ -102,7 +100,7 @@ class _HomeListState extends State<HomeList> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
