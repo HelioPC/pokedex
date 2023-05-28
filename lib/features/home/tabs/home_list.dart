@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
-import 'package:pokedex/features/home/widgets/filter_button.dart';
+import 'package:pokedex/features/home/widgets/filter_type_button.dart';
 import 'package:pokedex/features/home/widgets/pokemon_items.dart';
 import 'package:provider/provider.dart';
 
@@ -35,75 +35,6 @@ class _HomeListState extends State<HomeList> {
   void dispose() {
     searchController.dispose();
     super.dispose();
-  }
-
-  _showModalBottomSheetTypes() {
-    return showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                height: 4,
-                width: 30,
-                decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(.4),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Choose pokemon type',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              const SizedBox(height: 40),
-              Expanded(
-                child: ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 14);
-                  },
-                  itemCount: Pokemon.pokemonTypes.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Provider.of<PokemonState>(
-                          context,
-                          listen: false,
-                        ).filterPokemons(
-                          Pokemon.pokemonTypes[index],
-                        );
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        height: 35,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Pokemon.getColor(
-                              type: Pokemon.pokemonTypes[index],
-                            ),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Center(
-                            child: Text(
-                          Pokemon.pokemonTypes[index],
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        )),
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -176,14 +107,8 @@ class _HomeListState extends State<HomeList> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      FilterButton(
-                        onTap: () {},
-                        label: 'Min. id',
-                      ),
-                      FilterButton(
-                        onTap: _showModalBottomSheetTypes,
-                        label: 'All types',
-                      ),
+                      FilterTypeButton(),
+                      FilterTypeButton(),
                     ],
                   ),
                 ),

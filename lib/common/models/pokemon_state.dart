@@ -8,35 +8,72 @@ import 'package:pokedex/common/utils/string.dart';
 class PokemonState with ChangeNotifier {
   List<Pokemon> _list = [];
   List<Pokemon> _searchPokemons = [];
+  final List<String> _typeFilters = [];
   Pokemon? _currentPokemon;
   bool _error = false;
   String _errorMessage = '';
-  String _currentFilterType = '';
 
-  String get currentFilterType => _currentFilterType;
   List<Pokemon> get list => _list;
   List<Pokemon> get searchedPokemons => _searchPokemons;
   List<Pokemon> get favorites => _list.where((p) => p.favorite).toList();
+  List<String> get typeFilters => _typeFilters;
   Pokemon get currentPokemon => _currentPokemon!;
   bool get hasError => _error;
   String get errorMessage => _errorMessage;
 
+  void addTypeFilter(String type) {
+    _typeFilters.add(type);
+    _searchPokemons = list.where((p) {
+      return _typeFilters.isEmpty ||
+          p.types.any((t) => _typeFilters.contains(t));
+    }).toList();
+    notifyListeners();
+  }
+
+  void removeTypeFilter(String type) {
+    _typeFilters.remove(type);
+    _searchPokemons = list.where((p) {
+      return _typeFilters.isEmpty ||
+          p.types.any((t) => _typeFilters.contains(t));
+    }).toList();
+    notifyListeners();
+  }
+
+  void clearTypeFilters() {
+    _typeFilters.clear();
+    _searchPokemons = list.where((p) {
+      return _typeFilters.isEmpty ||
+          p.types.any((t) => _typeFilters.contains(t));
+    }).toList();
+    notifyListeners();
+  }
+
   void filterPokemons(String text) {
     if (text.isEmpty) {
-      _searchPokemons = list;
+      _searchPokemons = list.where((p) {
+        return _typeFilters.isEmpty ||
+            p.types.any((t) => _typeFilters.contains(t));
+      }).toList();
     } else {
-      _searchPokemons = list.where(
-        (p) {
-          if (Pokemon.pokemonTypes.contains(text.toLowerCase())) {
-            return p.types.contains(toCapitalCase(text));
-          }
+      _searchPokemons = list
+          .where((p) {
+            return _typeFilters.isEmpty ||
+                p.types.any((t) => _typeFilters.contains(t));
+          })
+          .toList()
+          .where(
+            (p) {
+              if (Pokemon.pokemonTypes.contains(text.toLowerCase())) {
+                return p.types.contains(toCapitalCase(text));
+              }
 
-          return (p.name['english'] as String)
-                  .toLowerCase()
-                  .contains(text.toLowerCase()) ||
-              p.id.toString().toLowerCase().contains(text.toLowerCase());
-        },
-      ).toList();
+              return (p.name['english'] as String)
+                      .toLowerCase()
+                      .contains(text.toLowerCase()) ||
+                  p.id.toString().toLowerCase().contains(text.toLowerCase());
+            },
+          )
+          .toList();
     }
     notifyListeners();
   }
