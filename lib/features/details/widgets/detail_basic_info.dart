@@ -37,7 +37,7 @@ class DetailBasicInfo extends StatelessWidget {
           children: infos
               .map(
                 (e) => SizedBox(
-                  width: 180,
+                  width: 150,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

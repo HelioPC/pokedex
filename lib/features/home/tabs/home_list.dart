@@ -40,8 +40,8 @@ class _HomeListState extends State<HomeList> {
     return Container(
       padding: const EdgeInsets.only(
         top: 0,
-        left: 24,
-        right: 24,
+        left: 10,
+        right: 10,
         bottom: 0,
       ),
       child: Column(

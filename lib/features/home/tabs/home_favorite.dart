@@ -17,7 +17,10 @@ class HomeFavorite extends StatelessWidget {
                 child: Text('No favourites pokemons'),
               )
             : Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 20,
+                ),
                 child: ListView.separated(
                   separatorBuilder: (context, index) => const SizedBox(
                     height: 25,
