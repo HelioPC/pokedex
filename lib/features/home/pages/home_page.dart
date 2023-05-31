@@ -1,3 +1,4 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/features/home/tabs/home_favorite.dart';
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         elevation: 0,
         centerTitle: false,
@@ -56,22 +58,24 @@ class _HomePageState extends State<HomePage> {
                     ][_currentIndex];
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: const Color(0xFF173EA5),
+      bottomNavigationBar: CustomNavigationBar(
+        backgroundColor: const Color(0xFFEDEDED),
+        selectedColor: const Color(0xFF173EA5),
         elevation: 8,
-        type: BottomNavigationBarType.fixed,
+        isFloating: true,
+        borderRadius: const Radius.circular(20.0),
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(
+        items: <CustomNavigationBarItem>[
+          CustomNavigationBarItem(
+            title: const Text('Home'),
+            icon: const Icon(
               Icons.catching_pokemon,
             ),
           ),
-          BottomNavigationBarItem(
-            label: 'Favorites',
-            icon: Icon(
+          CustomNavigationBarItem(
+            title: const Text('Favorites'),
+            icon: const Icon(
               Icons.favorite,
             ),
           ),
