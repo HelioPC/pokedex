@@ -20,16 +20,23 @@ class OnBoardContent extends StatelessWidget {
           height: 250,
         ),
         const Spacer(),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+        Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(description, textAlign: TextAlign.center),
+            ],
           ),
         ),
-        const SizedBox(height: 16),
-        Text(description, textAlign: TextAlign.center),
         const Spacer(),
       ],
     );

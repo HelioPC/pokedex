@@ -58,29 +58,29 @@ class _InitialPageState extends State<InitialPage> {
     context.read<PokemonState>().fetchPokemons();
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  controller: _pageController,
-                  onPageChanged: (value) {
-                    setState(() {
-                      _pageIndex = value;
-                    });
-                  },
-                  itemCount: onBoardDataContent.length,
-                  itemBuilder: (context, index) {
-                    return OnBoardContent(
-                      image: onBoardDataContent[index].image,
-                      title: onBoardDataContent[index].title,
-                      description: onBoardDataContent[index].description,
-                    );
-                  },
-                ),
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: (value) {
+                  setState(() {
+                    _pageIndex = value;
+                  });
+                },
+                itemCount: onBoardDataContent.length,
+                itemBuilder: (context, index) {
+                  return OnBoardContent(
+                    image: onBoardDataContent[index].image,
+                    title: onBoardDataContent[index].title,
+                    description: onBoardDataContent[index].description,
+                  );
+                },
               ),
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Row(
                 children: [
                   ...List.generate(
                     onBoardDataContent.length,
@@ -131,9 +131,9 @@ class _InitialPageState extends State<InitialPage> {
                     ),
                   ),
                 ],
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
