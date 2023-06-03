@@ -59,7 +59,6 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       bottomNavigationBar: CustomNavigationBar(
-        backgroundColor: const Color(0xFFEDEDED),
         selectedColor: const Color(0xFF173EA5),
         elevation: 8,
         isFloating: true,
