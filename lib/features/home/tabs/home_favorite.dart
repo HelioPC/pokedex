@@ -76,7 +76,7 @@ class HomeFavorite extends StatelessWidget {
                       },
                       child: Container(
                         width: double.infinity,
-                        height: 130,
+                        height: 150,
                         decoration: BoxDecoration(
                           color:
                               value.favorites[index].baseColor!.withOpacity(.2),

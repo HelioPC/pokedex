@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           theme: ThemeData(
             canvasColor: Colors.white,
+            useMaterial3: false,
           ),
           debugShowCheckedModeBanner: false,
           title: 'Pokedex 2k22',

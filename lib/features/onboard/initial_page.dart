@@ -109,6 +109,7 @@ class _InitialPageState extends State<InitialPage> {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -123,10 +124,14 @@ class _InitialPageState extends State<InitialPage> {
                               curve: Curves.ease);
                         },
                         style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(0),
                           backgroundColor: const Color(0xFF173EA5),
                           shape: const CircleBorder(),
                         ),
-                        child: const Icon(Icons.arrow_forward_ios),
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
