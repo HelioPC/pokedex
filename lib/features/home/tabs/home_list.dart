@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
+import 'package:pokedex/features/home/widgets/filter_index_button.dart';
 import 'package:pokedex/features/home/widgets/filter_type_button.dart';
 import 'package:pokedex/features/home/widgets/pokemon_items.dart';
 import 'package:provider/provider.dart';
@@ -106,7 +107,7 @@ class _HomeListState extends State<HomeList> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FilterTypeButton(),
-                      FilterTypeButton(),
+                      FilterIndexButton(),
                     ],
                   ),
                 ),
