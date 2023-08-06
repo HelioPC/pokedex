@@ -15,6 +15,7 @@ class Profile {
 
   double get maleGender => double.tryParse(gender.split(':')[0]) ?? 0;
   double get femaleGender => double.tryParse(gender.split(':')[1]) ?? 0;
+  bool get isGenderless => gender == 'Genderless';
 
   factory Profile.fromMap(Map<String, dynamic> json) {
     return Profile(

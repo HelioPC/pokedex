@@ -65,31 +65,41 @@ class DetailHeader extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 10),
-              LinearProgressIndicator(
-                backgroundColor: Colors.red,
-                color: Colors.blue,
-                minHeight: 10,
-                value: pokemon.profile.maleGender / 100,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.male),
-                      Text('${pokemon.profile.maleGender.toString()} %'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(Icons.female),
-                      Text('${pokemon.profile.femaleGender.toString()} %'),
-                    ],
-                  ),
-                ],
-              ),
+              if (!pokemon.profile.isGenderless) ...[
+                LinearProgressIndicator(
+                  backgroundColor: Colors.red,
+                  color: Colors.blue,
+                  minHeight: 10,
+                  value: pokemon.profile.maleGender / 100,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.male),
+                        Text('${pokemon.profile.maleGender.toString()} %'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.female),
+                        Text('${pokemon.profile.femaleGender.toString()} %'),
+                      ],
+                    ),
+                  ],
+                ),
+              ] else ...[
+                const LinearProgressIndicator(
+                  color: Colors.grey,
+                  minHeight: 10,
+                  value: 1,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                const Text('Genderless'),
+              ]
             ],
           ),
         ),
