@@ -19,6 +19,9 @@ dependencies:
   getwidget: ^3.1.1
   material_floating_search_bar_2: ^0.5.0
   custom_navigation_bar: ^0.8.2
+  flutter_config: ^2.0.2
+  shared_preferences: ^2.2.0
+  http: ^1.1.0
 
 flutter_native_splash:
   color: '#000029'

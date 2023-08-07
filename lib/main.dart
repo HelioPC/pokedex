@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:pokedex/common/models/pokemon_state.dart';
 import 'package:pokedex/common/routes/routes.dart';
+import 'package:pokedex/features/auth/services/auth.dart';
 import 'package:pokedex/features/onboard/initial_page.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await FlutterConfig.loadEnvVariables();
+
   runApp(const MyApp());
 }
 
@@ -13,8 +19,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => PokemonState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Auth()),
+        ChangeNotifierProvider(create: (context) => PokemonState()),
+      ],
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),

@@ -99,7 +99,7 @@ class _InitialPageState extends State<InitialPage> {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context)
-                              .pushReplacementNamed(Routes.home);
+                              .pushReplacementNamed(Routes.authOrHome);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF173EA5),
