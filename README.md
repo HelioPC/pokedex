@@ -4,16 +4,21 @@ A new Flutter project.
 
 ## Tabela de Conteúdos
 
-* [Eu](#eu)
-* [Descrição](#descrição)
-* [Imagens](#imagens)
-    * [Tela inicial & Editor](#imagens)
-    * [Tela inicial](#imagens)
-    * [Telas de detalhes](#telas%20de%20detalhes)
-        * [Tela nº 1](#nº%201)
-        * [Tela nº 2](#nº%202)
-        * [Tela nº 3](#nº%203)
-* [Flutter](#flutter)
+- [Pokedex](#pokedex)
+  - [Tabela de Conteúdos](#tabela-de-conteúdos)
+  - [Eu](#eu)
+  - [Descrição](#descrição)
+  - [Imagens](#imagens)
+    - [Onboard](#onboard)
+    - [Tela inicial](#tela-inicial)
+    - [Tela inicial (again 😛)](#tela-inicial-again-)
+    - [Filtragem por tipo](#filtragem-por-tipo)
+    - [Tela de favoritos](#tela-de-favoritos)
+    - [Telas de detalhes](#telas-de-detalhes)
+      - [Nº 1](#nº-1)
+      - [Nº 2 (The great Pikachu 😍)](#nº-2-the-great-pikachu-)
+  - [Estado](#estado)
+  - [Flutter](#flutter)
 
 ## Eu
 [Eu sou o Eliude P. C. Vemba](https://github.com/HelioPC) - Software developer.
@@ -24,25 +29,31 @@ Pokedex é uma aplicação muito conhecida para visualizar pokemons e seus detal
 
 ## Imagens
 
+### Onboard
+
+![Onboard 1](screenshots/screenshot_initial_1.png)
+![Onboard 2](screenshots/screenshot_initial_2.png)
+
 ### Tela inicial
 ![Editor + Home screen](screenshots/screenshot_main.png)
 
 ### Tela inicial (again 😛)
 ![Home screen](screenshots/screenshot_main_2.png)
 
-### Telas de detalhes
+### Filtragem por tipo
+![Filter](screenshots/screenshot_filter.png)
 
-🚧🚦🚨 Até o momento (commit e647a9c9c7c8aa4e25cfed56d5281e723d744672) a tela de
-detalhes não foi finalizada. 🚧🚦🚨
+### Tela de favoritos
+
+![Favourites](screenshots/screenshot_favourite.png)
+
+### Telas de detalhes
 
 #### Nº 1
 ![Detail screen 1](screenshots/screenshot_detail_img_1.png)
 
 #### Nº 2 (The great Pikachu 😍)
 ![Detail screen 2](screenshots/screenshot_detail_img_2.png)
-
-#### Nº 3
-![Detail screen 3](screenshots/screenshot_detail_img_3.png)
 
 ## Estado
 Still working on. 😒
