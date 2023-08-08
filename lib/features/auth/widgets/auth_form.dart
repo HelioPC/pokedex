@@ -193,10 +193,17 @@ class _AuthFormState extends State<AuthForm>
               ),
             Visibility(
               visible: !isLoading,
-              replacement: const CircularProgressIndicator(),
+              replacement: const CircularProgressIndicator(
+                color: Color(0xFF173EA5),
+              ),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                      Color(0xFF173EA5),
+                    ),
+                  ),
                   onPressed: _submit,
                   child:
                       Text(authMode == AuthMode.login ? 'Entrar' : 'Submeter'),
@@ -209,7 +216,7 @@ class _AuthFormState extends State<AuthForm>
                 text: _isLogin()
                     ? 'Não possui uma conta? '
                     : 'Já possui uma conta? ',
-                //style: TextStyle(color: context.theme.textColor),
+                style: const TextStyle(color: Colors.black),
                 children: [
                   TextSpan(
                     recognizer: TapGestureRecognizer()..onTap = _switchMode,

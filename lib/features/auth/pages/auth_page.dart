@@ -8,24 +8,24 @@ class AuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: const Scaffold(
+      child: Scaffold(
         extendBody: true,
         resizeToAvoidBottomInset: true,
         body: Center(
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Text(
-                  'BIKESHARED',
+                Image.asset(
+                  'lib/assets/images/ball.png',
+                  height: 50,
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'POKEDEX',
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10),
-                Icon(
-                  Icons.directions_bike,
-                  size: 100,
-                ),
-                SizedBox(height: 20),
-                AuthForm(),
+                const SizedBox(height: 20),
+                const AuthForm(),
               ],
             ),
           ),
